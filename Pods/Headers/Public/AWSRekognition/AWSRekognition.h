@@ -1,0 +1,1 @@
+../../../AWSRekognition/AWSRekognition/AWSRekognition.h

@@ -1,0 +1,1 @@
+../../../AWSRekognition/AWSRekognition/AWSRekognitionResources.h

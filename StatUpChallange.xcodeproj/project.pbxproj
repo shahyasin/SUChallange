@@ -7,25 +7,40 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E3D5B352BF70A1043105DF2 /* libPods-StatUpChallange.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D4DC716663758378072E7268 /* libPods-StatUpChallange.a */; };
+		3910C39F1EEBC66E006D4DD3 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 3910C39E1EEBC66E006D4DD3 /* Reachability.m */; };
 		39508CE01EEA7B2C004C0D35 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 39508CDF1EEA7B2C004C0D35 /* main.m */; };
 		39508CE31EEA7B2C004C0D35 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 39508CE21EEA7B2C004C0D35 /* AppDelegate.m */; };
-		39508CE61EEA7B2C004C0D35 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39508CE51EEA7B2C004C0D35 /* ViewController.m */; };
 		39508CE91EEA7B2C004C0D35 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39508CE71EEA7B2C004C0D35 /* Main.storyboard */; };
 		39508CEB1EEA7B2C004C0D35 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 39508CEA1EEA7B2C004C0D35 /* Assets.xcassets */; };
 		39508CEE1EEA7B2C004C0D35 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39508CEC1EEA7B2C004C0D35 /* LaunchScreen.storyboard */; };
+		396092E81EEAFB95007D4D63 /* TextEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 396092E71EEAFB95007D4D63 /* TextEditorViewController.m */; };
+		396092EC1EEAFC17007D4D63 /* ApiRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 396092EB1EEAFC17007D4D63 /* ApiRequest.m */; };
+		39E305021EEC9F010090C409 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39E305011EEC9F010090C409 /* SettingsViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3910C39D1EEBC66E006D4DD3 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = Reachability/Reachability.h; sourceTree = "<group>"; };
+		3910C39E1EEBC66E006D4DD3 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = Reachability/Reachability.m; sourceTree = "<group>"; };
 		39508CDB1EEA7B2C004C0D35 /* StatUpChallange.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StatUpChallange.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		39508CDF1EEA7B2C004C0D35 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		39508CE11EEA7B2C004C0D35 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		39508CE21EEA7B2C004C0D35 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		39508CE41EEA7B2C004C0D35 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		39508CE51EEA7B2C004C0D35 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		39508CE81EEA7B2C004C0D35 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		39508CEA1EEA7B2C004C0D35 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		39508CED1EEA7B2C004C0D35 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		39508CEF1EEA7B2C004C0D35 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		396092E61EEAFB95007D4D63 /* TextEditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TextEditorViewController.h; path = ViewControllers/TextEditorViewController.h; sourceTree = "<group>"; };
+		396092E71EEAFB95007D4D63 /* TextEditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TextEditorViewController.m; path = ViewControllers/TextEditorViewController.m; sourceTree = "<group>"; };
+		396092EA1EEAFC17007D4D63 /* ApiRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApiRequest.h; sourceTree = "<group>"; };
+		396092EB1EEAFC17007D4D63 /* ApiRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApiRequest.m; sourceTree = "<group>"; };
+		396092ED1EEAFC3D007D4D63 /* Api.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Api.h; sourceTree = "<group>"; };
+		396092EF1EEAFC73007D4D63 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		39E305001EEC9F010090C409 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsViewController.h; path = ViewControllers/SettingsViewController.h; sourceTree = "<group>"; };
+		39E305011EEC9F010090C409 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsViewController.m; path = ViewControllers/SettingsViewController.m; sourceTree = "<group>"; };
+		4B22A7411B7DF48CC312CE9E /* Pods-StatUpChallange.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StatUpChallange.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StatUpChallange/Pods-StatUpChallange.debug.xcconfig"; sourceTree = "<group>"; };
+		D4DC716663758378072E7268 /* libPods-StatUpChallange.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-StatUpChallange.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F14D8F53F21476989666F216 /* Pods-StatUpChallange.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StatUpChallange.release.xcconfig"; path = "Pods/Target Support Files/Pods-StatUpChallange/Pods-StatUpChallange.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,17 +48,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E3D5B352BF70A1043105DF2 /* libPods-StatUpChallange.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		183CC422CED55FE11D6273A5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D4DC716663758378072E7268 /* libPods-StatUpChallange.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3910C3A01EEBC682006D4DD3 /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				3910C39D1EEBC66E006D4DD3 /* Reachability.h */,
+				3910C39E1EEBC66E006D4DD3 /* Reachability.m */,
+			);
+			name = Reachability;
+			sourceTree = "<group>";
+		};
 		39508CD21EEA7B2C004C0D35 = {
 			isa = PBXGroup;
 			children = (
 				39508CDD1EEA7B2C004C0D35 /* StatUpChallange */,
 				39508CDC1EEA7B2C004C0D35 /* Products */,
+				F2029A85FA9C735901AD5A5F /* Pods */,
+				183CC422CED55FE11D6273A5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,10 +93,12 @@
 		39508CDD1EEA7B2C004C0D35 /* StatUpChallange */ = {
 			isa = PBXGroup;
 			children = (
+				3910C3A01EEBC682006D4DD3 /* Reachability */,
+				396092EE1EEAFC5B007D4D63 /* Utility */,
+				396092E91EEAFBC5007D4D63 /* ApiManager */,
+				396092E51EEAFB50007D4D63 /* ViewControllers */,
 				39508CE11EEA7B2C004C0D35 /* AppDelegate.h */,
 				39508CE21EEA7B2C004C0D35 /* AppDelegate.m */,
-				39508CE41EEA7B2C004C0D35 /* ViewController.h */,
-				39508CE51EEA7B2C004C0D35 /* ViewController.m */,
 				39508CE71EEA7B2C004C0D35 /* Main.storyboard */,
 				39508CEA1EEA7B2C004C0D35 /* Assets.xcassets */,
 				39508CEC1EEA7B2C004C0D35 /* LaunchScreen.storyboard */,
@@ -79,6 +116,44 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		396092E51EEAFB50007D4D63 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				396092E61EEAFB95007D4D63 /* TextEditorViewController.h */,
+				396092E71EEAFB95007D4D63 /* TextEditorViewController.m */,
+				39E305001EEC9F010090C409 /* SettingsViewController.h */,
+				39E305011EEC9F010090C409 /* SettingsViewController.m */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		396092E91EEAFBC5007D4D63 /* ApiManager */ = {
+			isa = PBXGroup;
+			children = (
+				396092ED1EEAFC3D007D4D63 /* Api.h */,
+				396092EA1EEAFC17007D4D63 /* ApiRequest.h */,
+				396092EB1EEAFC17007D4D63 /* ApiRequest.m */,
+			);
+			name = ApiManager;
+			sourceTree = "<group>";
+		};
+		396092EE1EEAFC5B007D4D63 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				396092EF1EEAFC73007D4D63 /* Constants.h */,
+			);
+			name = Utility;
+			sourceTree = "<group>";
+		};
+		F2029A85FA9C735901AD5A5F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4B22A7411B7DF48CC312CE9E /* Pods-StatUpChallange.debug.xcconfig */,
+				F14D8F53F21476989666F216 /* Pods-StatUpChallange.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -86,9 +161,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 39508CF21EEA7B2C004C0D35 /* Build configuration list for PBXNativeTarget "StatUpChallange" */;
 			buildPhases = (
+				868C6BD34F862103BA2BA537 /* [CP] Check Pods Manifest.lock */,
 				39508CD71EEA7B2C004C0D35 /* Sources */,
 				39508CD81EEA7B2C004C0D35 /* Frameworks */,
 				39508CD91EEA7B2C004C0D35 /* Resources */,
+				E148AF230E0F9BF9943D4E2A /* [CP] Embed Pods Frameworks */,
+				81FF0367B8E56F2BED5FAC08 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -110,6 +188,7 @@
 				TargetAttributes = {
 					39508CDA1EEA7B2C004C0D35 = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = GBLQ25Y829;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -145,14 +224,65 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		81FF0367B8E56F2BED5FAC08 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StatUpChallange/Pods-StatUpChallange-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		868C6BD34F862103BA2BA537 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		E148AF230E0F9BF9943D4E2A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StatUpChallange/Pods-StatUpChallange-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		39508CD71EEA7B2C004C0D35 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				39508CE61EEA7B2C004C0D35 /* ViewController.m in Sources */,
+				396092E81EEAFB95007D4D63 /* TextEditorViewController.m in Sources */,
 				39508CE31EEA7B2C004C0D35 /* AppDelegate.m in Sources */,
+				396092EC1EEAFC17007D4D63 /* ApiRequest.m in Sources */,
+				39E305021EEC9F010090C409 /* SettingsViewController.m in Sources */,
 				39508CE01EEA7B2C004C0D35 /* main.m in Sources */,
+				3910C39F1EEBC66E006D4DD3 /* Reachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,9 +400,12 @@
 		};
 		39508CF31EEA7B2C004C0D35 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4B22A7411B7DF48CC312CE9E /* Pods-StatUpChallange.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = GBLQ25Y829;
 				INFOPLIST_FILE = StatUpChallange/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.statupchallange.yasin.StatUpChallange;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -281,9 +414,12 @@
 		};
 		39508CF41EEA7B2C004C0D35 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F14D8F53F21476989666F216 /* Pods-StatUpChallange.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = GBLQ25Y829;
 				INFOPLIST_FILE = StatUpChallange/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.statupchallange.yasin.StatUpChallange;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -309,6 +445,7 @@
 				39508CF41EEA7B2C004C0D35 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
