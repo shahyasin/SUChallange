@@ -1823,7 +1823,7 @@ NSString *const AWSCognitoIdentityProviderErrorDomain = @"com.amazonaws.AWSCogni
 	return @{
              @"attributeDataType" : @"AttributeDataType",
              @"developerOnlyAttribute" : @"DeveloperOnlyAttribute",
-             @"varying" : @"Mutable",
+             @"mutable" : @"Mutable",
              @"name" : @"Name",
              @"numberAttributeConstraints" : @"NumberAttributeConstraints",
              @"required" : @"Required",

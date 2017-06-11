@@ -91,14 +91,13 @@
 
 - (void)serverError{
     [self hideProgressHud];
+    [self showAlertMessage:@"Server Error" forTitle:@"Error"];
 }
 
 - (void)internetConnectivityError{
     [self hideProgressHud];
+    [self showAlertMessage:@"Network Error" forTitle:@"Error"];
 }
-
-
-
 
 #pragma mark - ShakeEvent
 
@@ -110,7 +109,7 @@
             NSString *dayWord = [[NSUserDefaults standardUserDefaults]objectForKey:WordOfTheDay];
             UIToolbar* toolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
             toolbar.barStyle = UIBarStyleDefault;
-            [toolbar setBackgroundColor:[UIColor blueColor]];
+            [toolbar setBackgroundColor:[UIColor colorWithRed:18/255.0f green:208/255.0f blue:255/255.0f alpha:1]];
             [toolbar setAlpha:1.0f];
             toolbar.items = @[[[UIBarButtonItem alloc]initWithTitle:dayWord style:UIBarButtonItemStylePlain target:self action:@selector(showWordMeaning)]];
             [toolbar sizeToFit];

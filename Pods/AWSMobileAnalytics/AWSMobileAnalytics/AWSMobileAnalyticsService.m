@@ -24,7 +24,7 @@
 #import "AWSMobileAnalyticsDefaultDeliveryClient.h"
 #import "AWSMobileAnalyticsConfiguration.h"
 #import "AWSClientContext.h"
-#import "AWSCocoaLumberjack.h"
+#import "AWSLogging.h"
 #import "AWSSynchronizedMutableDictionary.h"
 #import "AWSMobileAnalyticsContext.h"
 #import "AWSMobileAnalyticsERSService.h"
@@ -226,7 +226,7 @@ static AWSSynchronizedMutableDictionary *_mobileAnalyticsForAppNamespace = nil;
 
         [_sessionClient startSession];
 
-        AWSDDLogInfo(@"Mobile Analytics SDK(%@) Initialization successfully completed.", [_mobileAnalyticsContext sdkInfo].sdkVersion);
+        AWSLogInfo(@"Mobile Analytics SDK(%@) Initialization successfully completed.", [_mobileAnalyticsContext sdkInfo].sdkVersion);
     }
 
     return self;

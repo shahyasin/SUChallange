@@ -17,7 +17,7 @@
 #import "AWSMobileAnalyticsBufferedReader.h"
 #import "AWSMobileAnalyticsWriter.h"
 #import "AWSMobileAnalyticsSerializerFactory.h"
-#import "AWSCocoaLumberjack.h"
+#import "AWSLogging.h"
 
 NSString * const AWSDefaultFileManagerErrorDomain = @"com.amazon.insights-framework.AWSDefaultFileManagerErrorDomain";
 
@@ -58,7 +58,7 @@ NSString * const AWSDefaultFileManagerErrorDomain = @"com.amazon.insights-framew
     NSError *error = nil;
     if([AWSMobileAnalyticsStringUtils isBlank:theDirectoryPath])
     {
-        AWSDDLogWarn( @"The directory path was blank");
+        AWSLogWarn( @"The directory path was blank");
         error =[AWSMobileAnalyticsErrorUtils errorWithDomain:AWSDefaultFileManagerErrorDomain
                                              withDescription: @"The path was blank"
                                                withErrorCode:AWSDefaultFileManagerErrorCode_EmptyOrNilPath];
@@ -504,7 +504,7 @@ NSString * const AWSDefaultFileManagerErrorDomain = @"com.amazon.insights-framew
 
     if(theReader == nil)
     {
-        AWSDDLogError( @"The reader provided was nil.");
+        AWSLogError( @"The reader provided was nil.");
         error = [AWSMobileAnalyticsErrorUtils errorWithDomain:AWSDefaultFileManagerErrorDomain
                                               withDescription:@"Nil reader"
                                                 withErrorCode: AWSDefaultFileManagerErrorCode_NilReader];
@@ -527,7 +527,7 @@ NSString * const AWSDefaultFileManagerErrorDomain = @"com.amazon.insights-framew
 
     if(error != nil)
     {
-        AWSDDLogError( @"There was an error while reading the contents from the file %@. %@", theFile.absolutePath, [error localizedDescription]);
+        AWSLogError( @"There was an error while reading the contents from the file %@. %@", theFile.absolutePath, [error localizedDescription]);
         [AWSMobileAnalyticsErrorUtils safeSetError:theError withError:error];
         if([theFile exists])
         {
@@ -573,7 +573,7 @@ NSString * const AWSDefaultFileManagerErrorDomain = @"com.amazon.insights-framew
                                                     withErrorCode: AWSDefaultFileManagerErrorCode_ErrorParsingFileContents];
         }
 
-        AWSDDLogVerbose( @"Not able to parse the contents from the file %@. %@. It is common if that file hasn't been created yet.", theFile.absolutePath, [error localizedDescription]);
+        AWSLogVerbose( @"Not able to parse the contents from the file %@. %@. It is common if that file hasn't been created yet.", theFile.absolutePath, [error localizedDescription]);
         [AWSMobileAnalyticsErrorUtils safeSetError:theError withError:error];
         if([theFile exists])
         {
@@ -631,7 +631,7 @@ withDataProcessor:(AWSDataProcessor) theDataProcessor
     {
         if(![theFile createNewFile])
         {
-            AWSDDLogError( @"There was an error while attempting to create the file.");
+            AWSLogError( @"There was an error while attempting to create the file.");
             error = [AWSMobileAnalyticsErrorUtils errorWithDomain:AWSDefaultFileManagerErrorDomain
                                                   withDescription:@"Failed to create file to write data to"
                                                     withErrorCode: AWSDefaultFileManagerErrorCode_UnableToCreateFile];
@@ -642,7 +642,7 @@ withDataProcessor:(AWSDataProcessor) theDataProcessor
 
     if(theWriter == nil)
     {
-        AWSDDLogError( @"The writer provided was nil.");
+        AWSLogError( @"The writer provided was nil.");
         error = [AWSMobileAnalyticsErrorUtils errorWithDomain:AWSDefaultFileManagerErrorDomain
                                               withDescription:@"Nil writer"
                                                 withErrorCode: AWSDefaultFileManagerErrorCode_NilWriter];
@@ -682,11 +682,11 @@ withDataProcessor:(AWSDataProcessor) theDataProcessor
         {
             if(error != nil)
             {
-                AWSDDLogError( @"There was an error while attempting to write to the file. %@", [error localizedDescription]);
+                AWSLogError( @"There was an error while attempting to write to the file. %@", [error localizedDescription]);
             }
             else
             {
-                AWSDDLogError( @"There was an error while attempting to write to the file.");
+                AWSLogError( @"There was an error while attempting to write to the file.");
             }
         }
         [AWSMobileAnalyticsErrorUtils safeSetError:theError withError:error];

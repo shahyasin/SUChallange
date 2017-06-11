@@ -16,7 +16,7 @@
 #import "AWSDynamoDBObjectMapper.h"
 #import "AWSDynamoDB.h"
 #import "AWSBolts.h"
-#import "AWSCocoaLumberjack.h"
+#import "AWSLogging.h"
 #import "AWSSynchronizedMutableDictionary.h"
 #import "AWSCategory.h"
 

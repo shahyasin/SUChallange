@@ -15,7 +15,7 @@
 
 #import "AWSMobileAnalyticsSessionStore.h"
 #import "AWSMobileAnalyticsStringUtils.h"
-#import "AWSCocoaLumberjack.h"
+#import "AWSLogging.h"
 
 NSString *const SESSION_FILE_NAME = @"sessionFile";
 NSString *const KEY_SESSION_ID = @"sessionId";
@@ -39,9 +39,9 @@ NSString *const KEY_SESSION_STOP_TIME = @"sessionStopTime";
         self.file = [self.fileManager createFileWithPath:SESSION_FILE_NAME error:&createError];
         if(self.file == nil && createError != nil) {
             if(createError != nil) {
-                AWSDDLogError( @"Error creating session file. %@", [createError localizedDescription]);
+                AWSLogError( @"Error creating session file. %@", [createError localizedDescription]);
             } else {
-                AWSDDLogError( @"The session file could not be created");
+                AWSLogError( @"The session file could not be created");
             }
             return nil;
         }
@@ -68,7 +68,7 @@ NSString *const KEY_SESSION_STOP_TIME = @"sessionStopTime";
 
     AWSMobileAnalyticsSession* session = [self createSessionFromSerializedDictionary:serializedSession];
     if(session == nil) {
-        AWSDDLogVerbose( @"Can not obtain session details from the file. It is common if there is no previous paused session saved in the file.");
+        AWSLogVerbose( @"Can not obtain session details from the file. It is common if there is no previous paused session saved in the file.");
         return nil;
     }
 
@@ -129,9 +129,9 @@ NSString *const KEY_SESSION_STOP_TIME = @"sessionStopTime";
 
     if(error != nil || !success) {
         if(error != nil) {
-            AWSDDLogError( @"There was an error while attempting to write the session to the file. %@", [error localizedDescription]);
+            AWSLogError( @"There was an error while attempting to write the session to the file. %@", [error localizedDescription]);
         } else {
-            AWSDDLogError( @"There was an error while attempting to write the session to the file.");
+            AWSLogError( @"There was an error while attempting to write the session to the file.");
         }
     }
 }
@@ -150,9 +150,9 @@ NSString *const KEY_SESSION_STOP_TIME = @"sessionStopTime";
 
     if(error != nil || deleteSuccessful == NO) {
         if(error != nil) {
-            AWSDDLogError( @"There was an error while attempting to delete the session file. %@", [error localizedDescription]);
+            AWSLogError( @"There was an error while attempting to delete the session file. %@", [error localizedDescription]);
         } else {
-            AWSDDLogError( @"There was an error while attempting to delete the session file.");
+            AWSLogError( @"There was an error while attempting to delete the session file.");
         }
         
         return NO;

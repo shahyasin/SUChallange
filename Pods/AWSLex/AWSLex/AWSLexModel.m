@@ -70,7 +70,6 @@ NSString *const AWSLexErrorDomain = @"com.amazonaws.AWSLexErrorDomain";
              @"audioStream" : @"audioStream",
              @"contentType" : @"contentType",
              @"dialogState" : @"dialogState",
-             @"inputTranscript" : @"inputTranscript",
              @"intentName" : @"intentName",
              @"message" : @"message",
              @"sessionAttributes" : @"sessionAttributes",

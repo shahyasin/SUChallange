@@ -16,7 +16,7 @@
 #import "AWSMobileAnalyticsInactiveSessionState.h"
 #import "AWSMobileAnalyticsDefaultSessionClient+SessionState.h"
 #import "AWSMobileAnalyticsSession.h"
-#import "AWSCocoaLumberjack.h"
+#import "AWSLogging.h"
 
 @implementation AWSMobileAnalyticsInactiveSessionState
 
@@ -26,7 +26,7 @@
 }
 
 -(void)pauseWithSessionClient:(AWSMobileAnalyticsDefaultSessionClient *)sessionClient{
-    AWSDDLogDebug( @"Session Pause Failed: No session is running.");
+    AWSLogDebug( @"Session Pause Failed: No session is running.");
 }
 
 -(void)startWithSessionClient:(AWSMobileAnalyticsDefaultSessionClient *)sessionClient{
@@ -35,15 +35,15 @@
 }
 
 -(void)stopWithSessionClient:(AWSMobileAnalyticsDefaultSessionClient *)sessionClient{
-    AWSDDLogDebug( @"Session Stop Failed: No session is running.");
+    AWSLogDebug( @"Session Stop Failed: No session is running.");
 }
 
 -(void)enterStateWithSessionClient:(AWSMobileAnalyticsDefaultSessionClient *)sessionClient{
-    AWSDDLogDebug( @"Session State: Entering Inactive State.");
+    AWSLogDebug( @"Session State: Entering Inactive State.");
 }
 
 -(void)exitStateWithSessionClient:(AWSMobileAnalyticsDefaultSessionClient *)sessionClient{
-    AWSDDLogDebug( @"Session State: Exiting Inactive State.");
+    AWSLogDebug( @"Session State: Exiting Inactive State.");
 }
 
 @end

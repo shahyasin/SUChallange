@@ -18,7 +18,7 @@
 #import "AWSBolts.h"
 #import "AWSTMCache.h"
 #import "AWSCategory.h"
-#import "AWSCocoaLumberjack.h"
+#import "AWSLogging.h"
 #import "AWSSynchronizedMutableDictionary.h"
 
 static NSString *const AWSInfoS3TransferManager = @"S3TransferManager";
@@ -414,7 +414,7 @@ static AWSSynchronizedMutableDictionary *_serviceClients = nil;
                     [[NSFileManager defaultManager] removeItemAtURL:tempURL
                                                               error:&error];
                     if (error) {
-                        AWSDDLogError(@"Failed to delete a temporary file for part upload: [%@]", error);
+                        AWSLogError(@"Failed to delete a temporary file for part upload: [%@]", error);
                     }
 
                     if (task.error) {
@@ -526,7 +526,7 @@ static AWSSynchronizedMutableDictionary *_serviceClients = nil;
                     generatedfileName = [components componentsJoinedByString:@"."];
 
                 } else {
-                    AWSDDLogError(@"[generatedPath componentsSeparatedByString] returns empty array or nil, generatedfileName:%@",generatedfileName);
+                    AWSLogError(@"[generatedPath componentsSeparatedByString] returns empty array or nil, generatedfileName:%@",generatedfileName);
                     NSString *errorString = [NSString stringWithFormat:@"[generatedPath componentsSeparatedByString] returns empty array or nil, generatedfileName:%@",generatedfileName];
                     NSDictionary *userInfo = @{NSLocalizedDescriptionKey: NSLocalizedString(errorString, nil)};
                     return [AWSTask taskWithError:[NSError errorWithDomain:AWSS3TransferManagerErrorDomain code:AWSS3TransferManagerErrorInternalInConsistency userInfo:userInfo]];
@@ -552,14 +552,14 @@ static AWSSynchronizedMutableDictionary *_serviceClients = nil;
         NSURL *tempFileURL = downloadRequest.temporaryFileURL;
         if (tempFileURL) {
             if ([[NSFileManager defaultManager] fileExistsAtPath:tempFileURL.path] == NO) {
-                AWSDDLogError(@"tempfile is not exist, unable to resume");
+                AWSLogError(@"tempfile is not exist, unable to resume");
             }
             NSError *error = nil;
             NSString *tempFilePath = tempFileURL.path;
             NSDictionary *attributes = [[NSFileManager defaultManager] attributesOfItemAtPath:[tempFilePath stringByResolvingSymlinksInPath]
                                                                                         error:&error];
             if (error) {
-                AWSDDLogError(@"Unable to resume download task: Failed to retrival tempFileURL. [%@]",error);
+                AWSLogError(@"Unable to resume download task: Failed to retrival tempFileURL. [%@]",error);
             }
             unsigned long long fileSize = [attributes fileSize];
             downloadRequest.range = [NSString stringWithFormat:@"bytes=%llu-",fileSize];
@@ -609,7 +609,7 @@ static AWSSynchronizedMutableDictionary *_serviceClients = nil;
         if (task.error) {
             //download got error, check if tempFile has been created.
             if ([[NSFileManager defaultManager] fileExistsAtPath:tempFileURL.path]) {
-                AWSDDLogDebug(@"tempFile has not been created yet.");
+                AWSLogDebug(@"tempFile has not been created yet.");
             }
             
             return [AWSTask taskWithError:task.error];
@@ -774,9 +774,9 @@ static AWSSynchronizedMutableDictionary *_serviceClients = nil;
 
     [[weakSelf.s3 abortMultipartUpload:abortMultipartUploadRequest] continueWithBlock:^id(AWSTask *task) {
         if (task.error) {
-            AWSDDLogDebug(@"Received response for abortMultipartUpload with Error:%@",task.error);
+            AWSLogDebug(@"Received response for abortMultipartUpload with Error:%@",task.error);
         } else {
-            AWSDDLogDebug(@"Received response for abortMultipartUpload.");
+            AWSLogDebug(@"Received response for abortMultipartUpload.");
         }
         return nil;
     }];

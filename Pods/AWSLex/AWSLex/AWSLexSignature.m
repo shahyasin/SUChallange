@@ -98,7 +98,7 @@ static NSString *const AWSLexSignatureScope = @"lex";
                                                                        headers:request.allHTTPHeaderFields
                                                                  contentSha256:contentSha256];
     
-    AWSDDLogVerbose(@"AWS4 Canonical Request: [%@]", canonicalRequest);
+    AWSLogVerbose(@"AWS4 Canonical Request: [%@]", canonicalRequest);
     
     NSString *scope = [NSString stringWithFormat:@"%@/%@/%@/%@",
                        dateStamp,
@@ -114,7 +114,7 @@ static NSString *const AWSLexSignatureScope = @"lex";
                               scope,
                               [AWSSignatureSignerUtility hexEncode:[AWSSignatureSignerUtility hashString:canonicalRequest]]];
     
-    AWSDDLogVerbose(@"AWS4 String to Sign: [%@]", stringToSign);
+    AWSLogVerbose(@"AWS4 String to Sign: [%@]", stringToSign);
     
     NSData *kSigning  = [AWSSignatureV4Signer getV4DerivedKey:credentials.secretKey
                                                          date:dateStamp

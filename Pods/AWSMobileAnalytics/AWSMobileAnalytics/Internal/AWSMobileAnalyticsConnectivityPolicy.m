@@ -15,7 +15,7 @@
 
 #import "AWSMobileAnalyticsConnectivityPolicy.h"
 #import "AWSMobileAnalyticsConfigurationKeys.h"
-#import "AWSCocoaLumberjack.h"
+#import "AWSLogging.h"
 static NSString* const AWSMobileAnalyticsSubmittedTimeKey = @"AWSMobileAnalyticsSubmissionTimePolicy.submissionTime";
 
 @interface AWSMobileAnalyticsConnectivityPolicy()
@@ -62,7 +62,7 @@ static NSString* const AWSMobileAnalyticsSubmittedTimeKey = @"AWSMobileAnalytics
         }
 
         if (isAllowed == NO) {
-            AWSDDLogWarn(@"Submission request being dropped because the device doesn't have network connection or allowWAN has been turned off while in Cellular network");
+            AWSLogWarn(@"Submission request being dropped because the device doesn't have network connection or allowWAN has been turned off while in Cellular network");
         }
         return isAllowed;
     }

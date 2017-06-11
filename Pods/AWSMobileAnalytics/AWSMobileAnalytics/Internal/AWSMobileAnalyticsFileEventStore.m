@@ -14,7 +14,7 @@
 //
 
 #import "AWSMobileAnalyticsFileEventStore.h"
-#import "AWSCocoaLumberjack.h"
+#import "AWSLogging.h"
 
 NSString * const AWSEventsDirectoryName = @"events";
 NSString * const AWSEventsFilename = @"eventsFile";
@@ -30,7 +30,7 @@ NSString * const AWSEventsFilename = @"eventsFile";
     
     if(theContext == nil)
     {
-        AWSDDLogError( @"Could not construct the AWSMobileAnalyticsFileEventStore because the context was nil");
+        AWSLogError( @"Could not construct the AWSMobileAnalyticsFileEventStore because the context was nil");
         return nil;
     }
    
@@ -46,7 +46,7 @@ NSString * const AWSEventsFilename = @"eventsFile";
         NSAssert(theContext != nil, @"The context must not be nil");
         if(theContext == nil)
         {
-            AWSDDLogError( @"The context must not be nil.");
+            AWSLogError( @"The context must not be nil.");
             return nil;
         }
         self.context = theContext;
@@ -58,7 +58,7 @@ NSString * const AWSEventsFilename = @"eventsFile";
         NSAssert(error == nil, @"There should not be an error when creating the events directory. Error: %@", [error localizedDescription]);
         if(error != nil || eventsDirectory == nil || ![eventsDirectory exists])
         {
-            AWSDDLogError( @"Unable to create events directory - An error occurred while attempting to create the events directory. Error: %@", [error localizedDescription]);
+            AWSLogError( @"Unable to create events directory - An error occurred while attempting to create the events directory. Error: %@", [error localizedDescription]);
             return nil;
         }
         
@@ -67,7 +67,7 @@ NSString * const AWSEventsFilename = @"eventsFile";
         NSAssert(error == nil, @"There should not be an error when creating the events file. Error: %@", [error localizedDescription]);
         if(error != nil || self.eventsFile == nil || ![self.eventsFile exists])
         {
-            AWSDDLogError( @"Unable to open events file - An error occurred while attempting to create/open the events file. Error: %@", [error localizedDescription]);
+            AWSLogError( @"Unable to open events file - An error occurred while attempting to create/open the events file. Error: %@", [error localizedDescription]);
             return nil;
         }
         
@@ -92,7 +92,7 @@ NSString * const AWSEventsFilename = @"eventsFile";
         [self tryInitializeWriter:&writer error:&error];
         if(error != nil || writer == nil)
         {
-            AWSDDLogError( @"Unable to write event to file - There was an error while attempting to create the writer. Error: %@", [error localizedDescription]);
+            AWSLogError( @"Unable to write event to file - There was an error while attempting to create the writer. Error: %@", [error localizedDescription]);
             [AWSMobileAnalyticsErrorUtils safeSetError:theError withError:error];
             return NO;
         }
@@ -103,12 +103,12 @@ NSString * const AWSEventsFilename = @"eventsFile";
         }
         else
         {
-            AWSDDLogError( @"The events file exceeded its allowed size of %d bytes.", maxStorageSize);
+            AWSLogError( @"The events file exceeded its allowed size of %d bytes.", maxStorageSize);
         }
         
         if(error != nil)
         {
-            AWSDDLogError( @"Unable to write event to file - There was an error while attempting to write to the writer. Error: %@", [error localizedDescription]);
+            AWSLogError( @"Unable to write event to file - There was an error while attempting to write to the writer. Error: %@", [error localizedDescription]);
         }
         [writer close];
     }
@@ -154,7 +154,7 @@ NSString * const AWSEventsFilename = @"eventsFile";
     AWSMobileAnalyticsFile *tempEventsFile = [fileManager createFileWithPath:[self.eventsFileName stringByAppendingString:@".tmp"] error:&error];
     if(error != nil || tempEventsFile == nil || ![tempEventsFile exists])
     {
-        AWSDDLogError( @"There was an error while attempting to create temporary events file. Error: %@", [error localizedDescription]);
+        AWSLogError( @"There was an error while attempting to create temporary events file. Error: %@", [error localizedDescription]);
         return self.eventsFile;
     }
     
@@ -196,12 +196,12 @@ NSString * const AWSEventsFilename = @"eventsFile";
                 }
                 else
                 {
-                    AWSDDLogError( @"Failed to rename temp file to events file");
+                    AWSLogError( @"Failed to rename temp file to events file");
                 }
             }
             else
             {
-                AWSDDLogError( @"Failed to delete previous events file");
+                AWSLogError( @"Failed to delete previous events file");
             }
         }
         else
@@ -210,7 +210,7 @@ NSString * const AWSEventsFilename = @"eventsFile";
             {
                 if(![tempEventsFile deleteFile])
                 {
-                    AWSDDLogError( @"Failed to delete the empty temp events file");
+                    AWSLogError( @"Failed to delete the empty temp events file");
                 }
             }
         }
@@ -251,7 +251,7 @@ NSString * const AWSEventsFilename = @"eventsFile";
         
         if(error != nil || inputStream == nil)
         {
-            AWSDDLogError( @"There was an error while attempting to create output stream to event file. Error: %@", [error localizedDescription]);
+            AWSLogError( @"There was an error while attempting to create output stream to event file. Error: %@", [error localizedDescription]);
             return NO;
         }
         

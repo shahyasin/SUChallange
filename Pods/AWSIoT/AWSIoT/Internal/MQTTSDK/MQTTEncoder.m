@@ -15,7 +15,7 @@
 //    Kyle Roche - initial API and implementation and/or initial documentation
 // 
 
-#import "AWSCocoaLumberjack.h"
+#import "AWSLogging.h"
 #import "MQTTEncoder.h"
 
 @interface MQTTEncoder () {
@@ -106,7 +106,7 @@
             }
             break;
         default:
-            AWSDDLogDebug(@"Oops, event code not handled: 0x%02lx", (unsigned long)eventCode);
+            AWSLogDebug(@"Oops, event code not handled: 0x%02lx", (unsigned long)eventCode);
             break;
     }
 }
@@ -116,7 +116,7 @@
     NSInteger n, length;
     
     if (_status != MQTTEncoderStatusReady) {
-        AWSDDLogInfo(@"Encoder not ready");
+        AWSLogInfo(@"Encoder not ready");
         return;
     }
     

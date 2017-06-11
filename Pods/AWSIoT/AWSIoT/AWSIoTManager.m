@@ -124,7 +124,7 @@ static AWSSynchronizedMutableDictionary *_serviceClients = nil;
     
     if ((commonName == nil) || (countryName == nil) || (organizationName == nil) || (organizationalUnitName == nil))
     {
-        AWSDDLogError(@"all CSR dictionary fields must be specified");
+        AWSLogError(@"all CSR dictionary fields must be specified");
         callback(nil);
     }
     
@@ -145,26 +145,26 @@ static AWSSynchronizedMutableDictionary *_serviceClients = nil;
 
     [[self.IoT createCertificateFromCsr:request] continueWithBlock:^id(AWSTask *task) {
         NSError *error = task.error;
-        AWSDDLogInfo(@"error: %@", error);
+        AWSLogInfo(@"error: %@", error);
         if (error != nil) {
             callback(nil);
             return nil;
         }
 
-        AWSDDLogInfo(@"result: %@", task.result);
+        AWSLogInfo(@"result: %@", task.result);
 
         if ([task.result isKindOfClass:[AWSIoTCreateCertificateFromCsrResponse class]]) {
 
             AWSIoTCreateCertificateFromCsrResponse *response = task.result;
 
             NSString* certificateArn = response.certificateArn;
-            AWSDDLogInfo(@"certificateArn: %@", certificateArn);
+            AWSLogInfo(@"certificateArn: %@", certificateArn);
 
             NSString* certificateId = response.certificateId;
-            AWSDDLogInfo(@"certificateId: %@", certificateId);
+            AWSLogInfo(@"certificateId: %@", certificateId);
 
             NSString* certificatePem = response.certificatePem;
-            AWSDDLogInfo(@"certificatePem: %@", certificatePem);
+            AWSLogInfo(@"certificatePem: %@", certificatePem);
 
             if (certificatePem != nil && certificateArn != nil && certificateId != nil) {
                 NSString *newPublicTag = [AWSIoTKeychain.publicKeyTag stringByAppendingString:certificateId];
@@ -224,7 +224,7 @@ static AWSSynchronizedMutableDictionary *_serviceClients = nil;
 
     if (![AWSIoTKeychain addPrivateKeyRef:privateKey tag:privateTag])
     {
-        AWSDDLogError(@"Unable to add private key");
+        AWSLogError(@"Unable to add private key");
         return NO;
     }
     
@@ -232,7 +232,7 @@ static AWSSynchronizedMutableDictionary *_serviceClients = nil;
     {
         [AWSIoTKeychain deleteAsymmetricKeysWithPublicTag:publicTag privateTag:privateTag];
         
-        AWSDDLogError(@"Unable to add public key");
+        AWSLogError(@"Unable to add public key");
         return NO;
     }
     
@@ -240,7 +240,7 @@ static AWSSynchronizedMutableDictionary *_serviceClients = nil;
     {
         [AWSIoTKeychain deleteAsymmetricKeysWithPublicTag:publicTag privateTag:privateTag];
         
-        AWSDDLogError(@"Unable to add certificate");
+        AWSLogError(@"Unable to add certificate");
         return NO;
     }
     
@@ -294,13 +294,13 @@ static AWSSynchronizedMutableDictionary *_serviceClients = nil;
         
         if (SecIdentityCopyPrivateKey(identityApp, privateKeyRef) != errSecSuccess)
         {
-                AWSDDLogError(@"Unable to copy private key");
+                AWSLogError(@"Unable to copy private key");
                 return errorCleanup();
         }
         
         if (SecIdentityCopyCertificate(identityApp, certRef) != errSecSuccess)
         {
-                AWSDDLogError(@"Unable to copy certificate");
+                AWSLogError(@"Unable to copy certificate");
                 return errorCleanup();
         }
         
@@ -311,7 +311,7 @@ static AWSSynchronizedMutableDictionary *_serviceClients = nil;
         status = SecTrustCreateWithCertificates((__bridge CFArrayRef) @[(__bridge id) *certRef], policy, &trust);
         if (status != errSecSuccess)
         {
-            AWSDDLogError(@"Unable to create trust");
+            AWSLogError(@"Unable to create trust");
             return errorCleanup();
         }
         //
@@ -320,7 +320,7 @@ static AWSSynchronizedMutableDictionary *_serviceClients = nil;
         SecTrustResultType result;
         if (SecTrustEvaluate(trust, &result) != errSecSuccess)
         {
-            AWSDDLogError(@"Unable to evaluate trust");
+            AWSLogError(@"Unable to evaluate trust");
             return errorCleanup();
         }
         
@@ -330,13 +330,13 @@ static AWSSynchronizedMutableDictionary *_serviceClients = nil;
         *publicKeyRef = SecTrustCopyPublicKey(trust);
         if(*publicKeyRef == NULL)
         {
-            AWSDDLogError(@"Unable to copy public key");
+            AWSLogError(@"Unable to copy public key");
             return errorCleanup();
         }
     
         return cleanup();
     }
-    AWSDDLogError(@"Unable to import from PKCS12 data");
+    AWSLogError(@"Unable to import from PKCS12 data");
     return errorCleanup();
 }
 

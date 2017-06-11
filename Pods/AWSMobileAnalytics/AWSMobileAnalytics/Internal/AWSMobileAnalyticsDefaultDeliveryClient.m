@@ -21,8 +21,8 @@
 #import "AWSMobileAnalyticsSerializable.h"
 #import "AWSMobileAnalyticsSerializerFactory.h"
 #import "AWSMobileAnalyticsStringUtils.h"
-#import "AWSCocoaLumberjack.h"
-#import "AWSMobileAnalyticsDefaultSessionClient.h"
+#import "AWSLogging.h"
+#import "AWSMObileAnalyticsDefaultSessionClient.h"
 #import <UIKit/UIKit.h>
 #import "AWSMobileAnalyticsClientContext.h"
 
@@ -118,12 +118,12 @@ NSUInteger const AWSMobileAnalyticsDefaultDeliveryClientMaxOperations = 1000;
 /*
 - (BOOL)validateEvent:(id<AWSMobileAnalyticsInternalEvent>)event {
     if (![event attributeForKey:AWSSessionIDAttributeKey]) {
-        AWSDDLogError(@"Event: '%@' Validation Error: %@ is nil", event.eventType, AWSSessionIDAttributeKey);
+        AWSLogError(@"Event: '%@' Validation Error: %@ is nil", event.eventType, AWSSessionIDAttributeKey);
         return NO;
     }
 
     if (![event attributeForKey:AWSSessionStartTimeAttributeKey]) {
-        AWSDDLogError(@"Event '%@' Validation Error: %@ is nil", event.eventType, AWSSessionStartTimeAttributeKey);
+        AWSLogError(@"Event '%@' Validation Error: %@ is nil", event.eventType, AWSSessionStartTimeAttributeKey);
         return NO;
     }
 
@@ -133,12 +133,12 @@ NSUInteger const AWSMobileAnalyticsDefaultDeliveryClientMaxOperations = 1000;
 
 - (void)enqueueEventForDelivery:(id<AWSMobileAnalyticsInternalEvent>) event {
     if(self.operationQueue.operationCount >= AWSMobileAnalyticsDefaultDeliveryClientMaxOperations) {
-        AWSDDLogError(@"The event: '%@' is being dropped because too many operations enqueued.", event.eventType);
+        AWSLogError(@"The event: '%@' is being dropped because too many operations enqueued.", event.eventType);
         return;
     }
 /*
     if (![self validateEvent:event]) {
-        AWSDDLogError(@"The event '%@'is being dropped because internal validation failed.", event.eventType);
+        AWSLogError(@"The event '%@'is being dropped because internal validation failed.", event.eventType);
         return;
     }
 */
@@ -146,17 +146,19 @@ NSUInteger const AWSMobileAnalyticsDefaultDeliveryClientMaxOperations = 1000;
         NSData* serializedEventData = [self.serializer writeObject:event];
         NSString* serializedEvent = [[NSString alloc] initWithData:serializedEventData encoding:NSUTF8StringEncoding];
 
-        NSMutableString* output = [[NSMutableString alloc]init];
-        [output appendString:@"\n==========Batch Object==========\n"];
-        [output appendString:serializedEvent];
-        AWSDDLogDebug( @"%@", output);
+        if([[AWSLogger defaultLogger] logLevel] >=  AWSLogLevelDebug) {
+            NSMutableString* output = [[NSMutableString alloc]init];
+            [output appendString:@"\n==========Batch Object==========\n"];
+            [output appendString:serializedEvent];
+            AWSLogDebug( @"%@", output);
+        }
 
         NSError* error = nil;
         [self.eventStore put:serializedEvent withError:&error];
         if(error) {
-            AWSDDLogError( @"event was not stored: %@", [error localizedDescription]);
+            AWSLogError( @"event was not stored: %@", [error localizedDescription]);
         } else {
-            AWSDDLogInfo(@"Event: '%@' recorded to local filestore", [AWSMobileAnalyticsStringUtils clipString:event.eventType
+            AWSLogInfo(@"Event: '%@' recorded to local filestore", [AWSMobileAnalyticsStringUtils clipString:event.eventType
                                                                                                   toMaxChars:5
                                                                                            andAppendEllipses:YES]);
         }
@@ -170,7 +172,7 @@ NSUInteger const AWSMobileAnalyticsDefaultDeliveryClientMaxOperations = 1000;
 
 - (void)attemptDeliveryUsingPolicies:(NSArray*)policies {
     if(self.operationQueue.operationCount >= AWSMobileAnalyticsDefaultDeliveryClientMaxOperations) {
-        AWSDDLogWarn(@"Submission request being dropped because too many operations enqueued");
+        AWSLogWarn(@"Submission request being dropped because too many operations enqueued");
         return;
     }
 
@@ -221,7 +223,7 @@ NSUInteger const AWSMobileAnalyticsDefaultDeliveryClientMaxOperations = 1000;
         }
 
         NSTimeInterval totalTime = [[NSDate date] timeIntervalSinceDate:start];
-        AWSDDLogInfo( @"Time of attemptDelivery: %f", totalTime);
+        AWSLogInfo( @"Time of attemptDelivery: %f", totalTime);
     }];
 }
 
@@ -243,18 +245,18 @@ NSUInteger const AWSMobileAnalyticsDefaultDeliveryClientMaxOperations = 1000;
             if ([task.error.domain isEqualToString:AWSMobileAnalyticsERSErrorDomain]
                 && task.error.code == AWSMobileAnalyticsERSErrorBadRequest) {
                 NSInteger responseCode = [task.error.userInfo[@"responseStatusCode"] integerValue];
-                AWSDDLogError(@"Server rejected submission of %lu events. (Pending events will be removed from queue.) Response code:%ld, Error Message:%@", (unsigned long)[events count], (long)responseCode, task.error);
+                AWSLogError(@"Server rejected submission of %lu events. (Pending events will be removed from queue.) Response code:%ld, Error Message:%@", (unsigned long)[events count], (long)responseCode, task.error);
                 submitted = YES;
             } else {
-                AWSDDLogError(@"Unable to successfully deliver events to server. Error Message:%@", task.error);
+                AWSLogError(@"Unable to successfully deliver events to server. Error Message:%@", task.error);
                 submitted = NO;
             }
         }
 
         if (task.result) {
             NSInteger responseCode = [task.result[@"responseStatusCode"] integerValue];
-            AWSDDLogVerbose(@"The http response code is %ld", (long)responseCode);
-            AWSDDLogInfo(@"Successful submission of %lu events. Response code:%ld", (unsigned long)[events count], (long)responseCode);
+            AWSLogVerbose(@"The http response code is %ld", (long)responseCode);
+            AWSLogInfo(@"Successful submission of %lu events. Response code:%ld", (unsigned long)[events count], (long)responseCode);
             submitted = YES;
         }
 

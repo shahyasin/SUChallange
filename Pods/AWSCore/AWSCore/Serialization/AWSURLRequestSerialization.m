@@ -12,6 +12,7 @@
 // express or implied. See the License for the specific language governing
 // permissions and limitations under the License.
 //
+
 #import "AWSURLRequestSerialization.h"
 
 #import "AWSGZIP.h"
@@ -20,7 +21,7 @@
 #import "AWSValidation.h"
 #import "AWSSerialization.h"
 #import "AWSCategory.h"
-#import "AWSCocoaLumberjack.h"
+#import "AWSLogging.h"
 #import "AWSClientContext.h"
 
 @interface NSMutableURLRequest (AWSRequestSerializer)
@@ -61,7 +62,7 @@
 
         _serviceDefinitionJSON = JSONDefinition;
         if (_serviceDefinitionJSON == nil) {
-            AWSDDLogError(@"serviceDefinitionJSON is nil.");
+            AWSLogError(@"serviceDefinitionJSON of is nil.");
             return nil;
         }
         _actionName = actionName;
@@ -157,7 +158,7 @@
 
         _serviceDefinitionJSON = JSONDefinition;
         if (_serviceDefinitionJSON == nil) {
-            AWSDDLogError(@"serviceDefinitionJSON is nil.");
+            AWSLogError(@"serviceDefinitionJSON of is nil.");
             return nil;
         }
         _actionName = actionName;
@@ -347,7 +348,7 @@
             
             //if the shape is a blob stream then set the request stream
             if([memberRules[@"shape"] isEqualToString:@"BlobStream"]){
-                AWSDDLogVerbose(@"value type = %@", [value class]);
+                AWSLogVerbose(@"value type = %@", [value class]);
                 if([value isKindOfClass:[NSInputStream class]]){
                     request.HTTPBodyStream = value;
                 }else{
@@ -446,7 +447,7 @@
     if (self = [super init]) {
         _serviceDefinitionJSON = JSONDefinition;
         if (_serviceDefinitionJSON == nil) {
-            AWSDDLogError(@"serviceDefinitionJSON of is nil.");
+            AWSLogError(@"serviceDefinitionJSON of is nil.");
             return nil;
         }
         _actionName = actionName;
@@ -478,7 +479,7 @@
                 [queryString appendString:@"="];
                 [queryString appendString:[[obj stringValue] aws_stringWithURLEncoding]];
             } else {
-                AWSDDLogError(@"key[%@] is invalid.", key);
+                AWSLogError(@"key[%@] is invalid.", key);
                 [queryString appendString:[key aws_stringWithURLEncoding]];
                 [queryString appendString:@"="];
                 [queryString appendString:[[obj description]aws_stringWithURLEncoding]];

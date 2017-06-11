@@ -18,11 +18,9 @@
 #import "AWSCognitoIdentityProviderSrpHelper.h"
 #import "AWSCognitoIdentityProviderHKDF.h"
 #import "AWSJKBigInteger.h"
-#import "AWSCocoaLumberjack.h"
 #import <CommonCrypto/CommonCrypto.h>
 #import <CommonCrypto/CommonKeyDerivation.h>
 #import <CommonCrypto/CommonDigest.h>
-#import <errno.h>
 
 #import "NSData+AWSCognitoIdentityProvider.h"
 
@@ -212,10 +210,7 @@ static NSString* N_IN_HEX = @"FFFFFFFFFFFFFFFFC90FDAA22168C234C4C6628B80DC1CD129
     size_t aBitLength = bitLength;
     size_t aByteLength = aBitLength/8;
     uint8_t *aBytes = malloc(aByteLength);
-    int functionExitCode = SecRandomCopyBytes(kSecRandomDefault, aByteLength, aBytes);
-    if (functionExitCode < 0) {
-        AWSDDLogError(@"SecRandomCopyBytes failed with error code %d: %s", errno, strerror(errno));
-    }
+    SecRandomCopyBytes(kSecRandomDefault, aByteLength, aBytes);
 
     aws_mp_int random;
     aws_mp_init(&random);

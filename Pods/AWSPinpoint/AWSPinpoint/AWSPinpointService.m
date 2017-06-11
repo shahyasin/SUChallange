@@ -132,7 +132,7 @@ static AWSSynchronizedMutableDictionary *_pinpointForAppNamespace = nil;
             _targetingClient = [[AWSPinpointTargetingClient alloc] initWithContext:_pinpointContext];
             _pinpointContext.targetingClient = _targetingClient;
         } else {
-            AWSDDLogWarn(@"Pinpoint Targeting is disabled.");
+            AWSLogWarn(@"Pinpoint Targeting is disabled.");
         }
         
         if (_configuration.enableEvents) {
@@ -142,7 +142,7 @@ static AWSSynchronizedMutableDictionary *_pinpointForAppNamespace = nil;
             _analyticsClient = [[AWSPinpointAnalyticsClient alloc] initWithContext:_pinpointContext];
             _pinpointContext.analyticsClient = _analyticsClient;
         } else {
-            AWSDDLogWarn(@"Pinpoint Analytics Event recording is disabled.");
+            AWSLogWarn(@"Pinpoint Analytics Event recording is disabled.");
         }
         
         _notificationManager = [[AWSPinpointNotificationManager alloc] initWithContext:_pinpointContext];
@@ -157,7 +157,7 @@ static AWSSynchronizedMutableDictionary *_pinpointForAppNamespace = nil;
             [_sessionClient startSession];
         }
         
-        AWSDDLogInfo(@"Pinpoint SDK Initialization successfully completed.");
+        AWSLogInfo(@"Pinpoint SDK Initialization successfully completed.");
     }
     
     return self;
@@ -165,21 +165,21 @@ static AWSSynchronizedMutableDictionary *_pinpointForAppNamespace = nil;
 
 - (AWSPinpointTargetingClient *)targetingClient {
     if (!_targetingClient) {
-        AWSDDLogError(@"Pinpoint Targeting is not enabled");
+        AWSLogError(@"Pinpoint Targeting is not enabled");
     }
     return _targetingClient;
 }
 
 - (AWSPinpointAnalyticsClient *)analyticsClient {
     if (!_analyticsClient) {
-        AWSDDLogError(@"Pinpoint Analytics is not enabled");
+        AWSLogError(@"Pinpoint Analytics is not enabled");
     }
     return _analyticsClient;
 }
 
 - (AWSPinpointSessionClient *)sessionClient {
     if (!_sessionClient) {
-        AWSDDLogError(@"Pinpoint Analytics is not enabled");
+        AWSLogError(@"Pinpoint Analytics is not enabled");
     }
     return _sessionClient;
 }

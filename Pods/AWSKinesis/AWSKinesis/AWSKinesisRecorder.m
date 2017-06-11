@@ -174,10 +174,10 @@ static AWSSynchronizedMutableDictionary *_serviceClients = nil;
     AWSKinesisPutRecordsInput *putRecordsInput = [AWSKinesisPutRecordsInput new];
     putRecordsInput.streamName = streamName;
     putRecordsInput.records = records;
-    AWSDDLogVerbose(@"putRecordsInput: [%@]", putRecordsInput);
+    AWSLogVerbose(@"putRecordsInput: [%@]", putRecordsInput);
     return [[self.kinesis putRecords:putRecordsInput] continueWithBlock:^id(AWSTask *task) {
         if (task.error) {
-            AWSDDLogError(@"Error: [%@]", task.error);
+            AWSLogError(@"Error: [%@]", task.error);
             if ([task.error.domain isEqualToString:NSURLErrorDomain]) {
                 *stop = YES;
             }
@@ -188,7 +188,7 @@ static AWSSynchronizedMutableDictionary *_serviceClients = nil;
             for (int i = 0; i < [putRecordsOutput.records count]; i++) {
                 AWSKinesisPutRecordsResultEntry *resultEntry = putRecordsOutput.records[i];
                 if (resultEntry.errorCode) {
-                    AWSDDLogInfo(@"Error Code: [%@] Error Message: [%@]", resultEntry.errorCode, resultEntry.errorMessage);
+                    AWSLogInfo(@"Error Code: [%@] Error Message: [%@]", resultEntry.errorCode, resultEntry.errorMessage);
                 }
                 // When the error code is ProvisionedThroughputExceededException or InternalFailure,
                 // we should retry. So, don't delete the row from the database.

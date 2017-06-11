@@ -41,32 +41,13 @@ typedef NS_ENUM(NSInteger, AWSIoTErrorType) {
     AWSIoTErrorTransferAlreadyCompleted,
     AWSIoTErrorTransferConflict,
     AWSIoTErrorUnauthorized,
-    AWSIoTErrorVersionConflict,
     AWSIoTErrorVersionsLimitExceeded,
-};
-
-typedef NS_ENUM(NSInteger, AWSIoTAutoRegistrationStatus) {
-    AWSIoTAutoRegistrationStatusUnknown,
-    AWSIoTAutoRegistrationStatusEnable,
-    AWSIoTAutoRegistrationStatusDisable,
 };
 
 typedef NS_ENUM(NSInteger, AWSIoTCACertificateStatus) {
     AWSIoTCACertificateStatusUnknown,
     AWSIoTCACertificateStatusActive,
     AWSIoTCACertificateStatusInactive,
-};
-
-typedef NS_ENUM(NSInteger, AWSIoTCannedAccessControlList) {
-    AWSIoTCannedAccessControlListUnknown,
-    AWSIoTCannedAccessControlListPrivate,
-    AWSIoTCannedAccessControlListPublicRead,
-    AWSIoTCannedAccessControlListPublicReadWrite,
-    AWSIoTCannedAccessControlListAwsExecRead,
-    AWSIoTCannedAccessControlListAuthenticatedRead,
-    AWSIoTCannedAccessControlListBucketOwnerRead,
-    AWSIoTCannedAccessControlListBucketOwnerFullControl,
-    AWSIoTCannedAccessControlListLogDeliveryWrite,
 };
 
 typedef NS_ENUM(NSInteger, AWSIoTCertificateStatus) {
@@ -76,13 +57,6 @@ typedef NS_ENUM(NSInteger, AWSIoTCertificateStatus) {
     AWSIoTCertificateStatusRevoked,
     AWSIoTCertificateStatusPendingTransfer,
     AWSIoTCertificateStatusRegisterInactive,
-    AWSIoTCertificateStatusPendingActivation,
-};
-
-typedef NS_ENUM(NSInteger, AWSIoTDynamoKeyType) {
-    AWSIoTDynamoKeyTypeUnknown,
-    AWSIoTDynamoKeyTypeString,
-    AWSIoTDynamoKeyTypeNumber,
 };
 
 typedef NS_ENUM(NSInteger, AWSIoTLogLevel) {
@@ -123,8 +97,6 @@ typedef NS_ENUM(NSInteger, AWSIoTMessageFormat) {
 @class AWSIoTCreatePolicyVersionResponse;
 @class AWSIoTCreateThingRequest;
 @class AWSIoTCreateThingResponse;
-@class AWSIoTCreateThingTypeRequest;
-@class AWSIoTCreateThingTypeResponse;
 @class AWSIoTCreateTopicRuleRequest;
 @class AWSIoTDeleteCACertificateRequest;
 @class AWSIoTDeleteCACertificateResponse;
@@ -135,11 +107,7 @@ typedef NS_ENUM(NSInteger, AWSIoTMessageFormat) {
 @class AWSIoTDeleteRegistrationCodeResponse;
 @class AWSIoTDeleteThingRequest;
 @class AWSIoTDeleteThingResponse;
-@class AWSIoTDeleteThingTypeRequest;
-@class AWSIoTDeleteThingTypeResponse;
 @class AWSIoTDeleteTopicRuleRequest;
-@class AWSIoTDeprecateThingTypeRequest;
-@class AWSIoTDeprecateThingTypeResponse;
 @class AWSIoTDescribeCACertificateRequest;
 @class AWSIoTDescribeCACertificateResponse;
 @class AWSIoTDescribeCertificateRequest;
@@ -148,14 +116,11 @@ typedef NS_ENUM(NSInteger, AWSIoTMessageFormat) {
 @class AWSIoTDescribeEndpointResponse;
 @class AWSIoTDescribeThingRequest;
 @class AWSIoTDescribeThingResponse;
-@class AWSIoTDescribeThingTypeRequest;
-@class AWSIoTDescribeThingTypeResponse;
 @class AWSIoTDetachPrincipalPolicyRequest;
 @class AWSIoTDetachThingPrincipalRequest;
 @class AWSIoTDetachThingPrincipalResponse;
 @class AWSIoTDisableTopicRuleRequest;
 @class AWSIoTDynamoDBAction;
-@class AWSIoTDynamoDBv2Action;
 @class AWSIoTElasticsearchAction;
 @class AWSIoTEnableTopicRuleRequest;
 @class AWSIoTFirehoseAction;
@@ -178,12 +143,8 @@ typedef NS_ENUM(NSInteger, AWSIoTMessageFormat) {
 @class AWSIoTListCertificatesByCAResponse;
 @class AWSIoTListCertificatesRequest;
 @class AWSIoTListCertificatesResponse;
-@class AWSIoTListOutgoingCertificatesRequest;
-@class AWSIoTListOutgoingCertificatesResponse;
 @class AWSIoTListPoliciesRequest;
 @class AWSIoTListPoliciesResponse;
-@class AWSIoTListPolicyPrincipalsRequest;
-@class AWSIoTListPolicyPrincipalsResponse;
 @class AWSIoTListPolicyVersionsRequest;
 @class AWSIoTListPolicyVersionsResponse;
 @class AWSIoTListPrincipalPoliciesRequest;
@@ -192,17 +153,13 @@ typedef NS_ENUM(NSInteger, AWSIoTMessageFormat) {
 @class AWSIoTListPrincipalThingsResponse;
 @class AWSIoTListThingPrincipalsRequest;
 @class AWSIoTListThingPrincipalsResponse;
-@class AWSIoTListThingTypesRequest;
-@class AWSIoTListThingTypesResponse;
 @class AWSIoTListThingsRequest;
 @class AWSIoTListThingsResponse;
 @class AWSIoTListTopicRulesRequest;
 @class AWSIoTListTopicRulesResponse;
 @class AWSIoTLoggingOptionsPayload;
-@class AWSIoTOutgoingCertificate;
 @class AWSIoTPolicy;
 @class AWSIoTPolicyVersion;
-@class AWSIoTPutItemInput;
 @class AWSIoTRegisterCACertificateRequest;
 @class AWSIoTRegisterCACertificateResponse;
 @class AWSIoTRegisterCertificateRequest;
@@ -216,9 +173,6 @@ typedef NS_ENUM(NSInteger, AWSIoTMessageFormat) {
 @class AWSIoTSnsAction;
 @class AWSIoTSqsAction;
 @class AWSIoTThingAttribute;
-@class AWSIoTThingTypeDefinition;
-@class AWSIoTThingTypeMetadata;
-@class AWSIoTThingTypeProperties;
 @class AWSIoTTopicRule;
 @class AWSIoTTopicRuleListItem;
 @class AWSIoTTopicRulePayload;
@@ -271,12 +225,7 @@ typedef NS_ENUM(NSInteger, AWSIoTMessageFormat) {
 @property (nonatomic, strong) AWSIoTDynamoDBAction * _Nullable dynamoDB;
 
 /**
- <p>Write to a DynamoDB table. This is a new version of the DynamoDB action. It allows you to write each attribute in an MQTT message payload into a separate DynamoDB column.</p>
- */
-@property (nonatomic, strong) AWSIoTDynamoDBv2Action * _Nullable dynamoDBv2;
-
-/**
- <p>Write data to an Amazon Elasticsearch Service domain.</p>
+ <p>Write data to an Amazon Elasticsearch Service; domain.</p>
  */
 @property (nonatomic, strong) AWSIoTElasticsearchAction * _Nullable elasticsearch;
 
@@ -344,7 +293,7 @@ typedef NS_ENUM(NSInteger, AWSIoTMessageFormat) {
 
 
 /**
- <p>The principal, such as a certificate or other credential.</p>
+ <p>The principal (certificate or other credential).</p>
  */
 @property (nonatomic, strong) NSString * _Nullable principal;
 
@@ -364,20 +313,15 @@ typedef NS_ENUM(NSInteger, AWSIoTMessageFormat) {
 @end
 
 /**
- <p>The attribute payload.</p>
+ <p>The attribute payload, a JSON string containing up to three key-value pairs (for example, {\"attributes\":{\"string1\":\"string2\"}}).</p>
  */
 @interface AWSIoTAttributePayload : AWSModel
 
 
 /**
- <p>A JSON string containing up to three key-value pair in JSON format. For example:</p><p><code>{\"attributes\":{\"string1\":\"string2\"}})</code></p>
+ <p>A JSON string containing up to three key-value pair in JSON format (for example, {\"attributes\":{\"string1\":\"string2\"}}).</p>
  */
 @property (nonatomic, strong) NSDictionary<NSString *, NSString *> * _Nullable attributes;
-
-/**
- <p>Specifies whether the list of attributes provided in the <code>AttributePayload</code> is merged with the attributes stored in the registry, instead of overwriting them.</p><p>To remove an attribute, call <code>UpdateThing</code> with an empty attribute value.</p><note><p>The <code>merge</code> attribute is only valid when calling <code>UpdateThing</code>.</p></note>
- */
-@property (nonatomic, strong) NSNumber * _Nullable merge;
 
 @end
 
@@ -403,7 +347,7 @@ typedef NS_ENUM(NSInteger, AWSIoTMessageFormat) {
 @property (nonatomic, strong) NSDate * _Nullable creationDate;
 
 /**
- <p>The status of the CA certificate. </p><p>The status value REGISTER_INACTIVE is deprecated and should not be used.</p>
+ <p>The status of the CA certificate.</p>
  */
 @property (nonatomic, assign) AWSIoTCACertificateStatus status;
 
@@ -414,11 +358,6 @@ typedef NS_ENUM(NSInteger, AWSIoTMessageFormat) {
  */
 @interface AWSIoTCACertificateDescription : AWSModel
 
-
-/**
- <p>Whether the CA certificate configured for auto registration of device certificates. Valid values are "ENABLE" and "DISABLE"</p>
- */
-@property (nonatomic, assign) AWSIoTAutoRegistrationStatus autoRegistrationStatus;
 
 /**
  <p>The CA certificate ARN.</p>
@@ -488,7 +427,7 @@ typedef NS_ENUM(NSInteger, AWSIoTMessageFormat) {
 @property (nonatomic, strong) NSDate * _Nullable creationDate;
 
 /**
- <p>The status of the certificate.</p><p>The status value REGISTER_INACTIVE is deprecated and should not be used.</p>
+ <p>The status of the certificate.</p>
  */
 @property (nonatomic, assign) AWSIoTCertificateStatus status;
 
@@ -810,19 +749,14 @@ typedef NS_ENUM(NSInteger, AWSIoTMessageFormat) {
 
 
 /**
- <p>The attribute payload, which consists of up to three name/value pairs in a JSON document. For example:</p><p><code>{\"attributes\":{\"string1\":\"string2\"}})</code></p>
+ <p>The attribute payload, which consists of up to 3 name/value pairs in a JSON document (for example, {\"attributes\":{\"string1\":\"string2\"}}).</p>
  */
 @property (nonatomic, strong) AWSIoTAttributePayload * _Nullable attributePayload;
 
 /**
- <p>The name of the thing to create.</p>
+ <p>The name of the thing.</p>
  */
 @property (nonatomic, strong) NSString * _Nullable thingName;
-
-/**
- <p>The name of the thing type associated with the new thing.</p>
- */
-@property (nonatomic, strong) NSString * _Nullable thingTypeName;
 
 @end
 
@@ -833,51 +767,14 @@ typedef NS_ENUM(NSInteger, AWSIoTMessageFormat) {
 
 
 /**
- <p>The ARN of the new thing.</p>
+ <p>The thing ARN.</p>
  */
 @property (nonatomic, strong) NSString * _Nullable thingArn;
 
 /**
- <p>The name of the new thing.</p>
+ <p>The name of the thing.</p>
  */
 @property (nonatomic, strong) NSString * _Nullable thingName;
-
-@end
-
-/**
- <p>The input for the CreateThingType operation.</p>
- Required parameters: [thingTypeName]
- */
-@interface AWSIoTCreateThingTypeRequest : AWSRequest
-
-
-/**
- <p>The name of the thing type.</p>
- */
-@property (nonatomic, strong) NSString * _Nullable thingTypeName;
-
-/**
- <p>The ThingTypeProperties for the thing type to create. It contains information about the new thing type including a description, and a list of searchable thing attribute names.</p>
- */
-@property (nonatomic, strong) AWSIoTThingTypeProperties * _Nullable thingTypeProperties;
-
-@end
-
-/**
- <p>The output of the CreateThingType operation.</p>
- */
-@interface AWSIoTCreateThingTypeResponse : AWSModel
-
-
-/**
- <p>The Amazon Resource Name (ARN) of the thing type.</p>
- */
-@property (nonatomic, strong) NSString * _Nullable thingTypeArn;
-
-/**
- <p>The name of the thing type.</p>
- */
-@property (nonatomic, strong) NSString * _Nullable thingTypeName;
 
 @end
 
@@ -993,12 +890,7 @@ typedef NS_ENUM(NSInteger, AWSIoTMessageFormat) {
 
 
 /**
- <p>The expected version of the thing record in the registry. If the version of the record in the registry does not match the expected version specified in the request, the <code>DeleteThing</code> request is rejected with a <code>VersionConflictException</code>.</p>
- */
-@property (nonatomic, strong) NSNumber * _Nullable expectedVersion;
-
-/**
- <p>The name of the thing to delete.</p>
+ <p>The thing name.</p>
  */
 @property (nonatomic, strong) NSString * _Nullable thingName;
 
@@ -1008,28 +900,6 @@ typedef NS_ENUM(NSInteger, AWSIoTMessageFormat) {
  <p>The output of the DeleteThing operation.</p>
  */
 @interface AWSIoTDeleteThingResponse : AWSModel
-
-
-@end
-
-/**
- <p>The input for the DeleteThingType operation.</p>
- Required parameters: [thingTypeName]
- */
-@interface AWSIoTDeleteThingTypeRequest : AWSRequest
-
-
-/**
- <p>The name of the thing type.</p>
- */
-@property (nonatomic, strong) NSString * _Nullable thingTypeName;
-
-@end
-
-/**
- <p>The output for the DeleteThingType operation.</p>
- */
-@interface AWSIoTDeleteThingTypeResponse : AWSModel
 
 
 @end
@@ -1045,33 +915,6 @@ typedef NS_ENUM(NSInteger, AWSIoTMessageFormat) {
  <p>The name of the rule.</p>
  */
 @property (nonatomic, strong) NSString * _Nullable ruleName;
-
-@end
-
-/**
- <p>The input for the DeprecateThingType operation.</p>
- Required parameters: [thingTypeName]
- */
-@interface AWSIoTDeprecateThingTypeRequest : AWSRequest
-
-
-/**
- <p>The name of the thing type to deprecate.</p>
- */
-@property (nonatomic, strong) NSString * _Nullable thingTypeName;
-
-/**
- <p>Whether to undeprecate a deprecated thing type. If <b>true</b>, the thing type will not be deprecated anymore and you can associate it with things.</p>
- */
-@property (nonatomic, strong) NSNumber * _Nullable undoDeprecate;
-
-@end
-
-/**
- <p>The output for the DeprecateThingType operation.</p>
- */
-@interface AWSIoTDeprecateThingTypeResponse : AWSModel
-
 
 @end
 
@@ -1171,7 +1014,7 @@ typedef NS_ENUM(NSInteger, AWSIoTMessageFormat) {
 
 
 /**
- <p>The thing attributes.</p>
+ <p>The attributes, which are name/value pairs in JSON format (for example: {\"attributes\":{\"some-name1\":\"some-value1\"}, {\"some-name2\":\"some-value2\"}, {\"some-name3\":\"some-value3\"}})</p>
  */
 @property (nonatomic, strong) NSDictionary<NSString *, NSString *> * _Nullable attributes;
 
@@ -1184,53 +1027,6 @@ typedef NS_ENUM(NSInteger, AWSIoTMessageFormat) {
  <p>The name of the thing.</p>
  */
 @property (nonatomic, strong) NSString * _Nullable thingName;
-
-/**
- <p>The thing type name.</p>
- */
-@property (nonatomic, strong) NSString * _Nullable thingTypeName;
-
-/**
- <p>The current version of the thing record in the registry.</p><note><p>To avoid unintentional changes to the information in the registry, you can pass the version information in the <code>expectedVersion</code> parameter of the <code>UpdateThing</code> and <code>DeleteThing</code> calls.</p></note>
- */
-@property (nonatomic, strong) NSNumber * _Nullable version;
-
-@end
-
-/**
- <p>The input for the DescribeThingType operation.</p>
- Required parameters: [thingTypeName]
- */
-@interface AWSIoTDescribeThingTypeRequest : AWSRequest
-
-
-/**
- <p>The name of the thing type.</p>
- */
-@property (nonatomic, strong) NSString * _Nullable thingTypeName;
-
-@end
-
-/**
- <p>The output for the DescribeThingType operation.</p>
- */
-@interface AWSIoTDescribeThingTypeResponse : AWSModel
-
-
-/**
- <p>The ThingTypeMetadata contains additional information about the thing type including: creation date and time, a value indicating whether the thing type is deprecated, and a date and time when time was deprecated.</p>
- */
-@property (nonatomic, strong) AWSIoTThingTypeMetadata * _Nullable thingTypeMetadata;
-
-/**
- <p>The name of the thing type.</p>
- */
-@property (nonatomic, strong) NSString * _Nullable thingTypeName;
-
-/**
- <p>The ThingTypeProperties contains information about the thing type including description, and a list of searchable thing attribute names.</p>
- */
-@property (nonatomic, strong) AWSIoTThingTypeProperties * _Nullable thingTypeProperties;
 
 @end
 
@@ -1261,7 +1057,7 @@ typedef NS_ENUM(NSInteger, AWSIoTMessageFormat) {
 
 
 /**
- <p>If the principal is a certificate, this value must be ARN of the certificate. If the principal is an Amazon Cognito identity, this value must be the ID of the Amazon Cognito identity.</p>
+ <p>The principal.</p>
  */
 @property (nonatomic, strong) NSString * _Nullable principal;
 
@@ -1296,7 +1092,7 @@ typedef NS_ENUM(NSInteger, AWSIoTMessageFormat) {
 
 /**
  <p>Describes an action to write to a DynamoDB table.</p><p>The <code>tableName</code>, <code>hashKeyField</code>, and <code>rangeKeyField</code> values must match the values used when you created the table.</p><p>The <code>hashKeyValue</code> and <code>rangeKeyvalue</code> fields use a substitution template syntax. These templates provide data at runtime. The syntax is as follows: ${<i>sql-expression</i>}.</p><p>You can specify any valid expression in a WHERE or SELECT clause, including JSON properties, comparisons, calculations, and functions. For example, the following field uses the third level of the topic:</p><p><code>"hashKeyValue": "${topic(3)}"</code></p><p>The following field uses the timestamp:</p><p><code>"rangeKeyValue": "${timestamp()}"</code></p>
- Required parameters: [tableName, roleArn, hashKeyField, hashKeyValue]
+ Required parameters: [tableName, roleArn, hashKeyField, hashKeyValue, rangeKeyField, rangeKeyValue]
  */
 @interface AWSIoTDynamoDBAction : AWSModel
 
@@ -1307,19 +1103,9 @@ typedef NS_ENUM(NSInteger, AWSIoTMessageFormat) {
 @property (nonatomic, strong) NSString * _Nullable hashKeyField;
 
 /**
- <p>The hash key type. Valid values are "STRING" or "NUMBER"</p>
- */
-@property (nonatomic, assign) AWSIoTDynamoKeyType hashKeyType;
-
-/**
  <p>The hash key value.</p>
  */
 @property (nonatomic, strong) NSString * _Nullable hashKeyValue;
-
-/**
- <p>The type of operation to be performed. This follows the substitution template, so it can be <code>${operation}</code>, but the substitution must result in one of the following: <code>INSERT</code>, <code>UPDATE</code>, or <code>DELETE</code>.</p>
- */
-@property (nonatomic, strong) NSString * _Nullable operation;
 
 /**
  <p>The action payload. This name can be customized.</p>
@@ -1330,11 +1116,6 @@ typedef NS_ENUM(NSInteger, AWSIoTMessageFormat) {
  <p>The range key name.</p>
  */
 @property (nonatomic, strong) NSString * _Nullable rangeKeyField;
-
-/**
- <p>The range key type. Valid values are "STRING" or "NUMBER"</p>
- */
-@property (nonatomic, assign) AWSIoTDynamoKeyType rangeKeyType;
 
 /**
  <p>The range key value.</p>
@@ -1354,25 +1135,7 @@ typedef NS_ENUM(NSInteger, AWSIoTMessageFormat) {
 @end
 
 /**
- <p>Describes an action to write to a DynamoDB table.</p><p>This DynamoDB action writes each attribute in the message payload into it's own column in the DynamoDB table.</p>
- */
-@interface AWSIoTDynamoDBv2Action : AWSModel
-
-
-/**
- <p>Specifies the DynamoDB table to which the message data will be written. For example:</p><p><code>{ "dynamoDBv2": { "roleArn": "aws:iam:12341251:my-role" "putItem": { "tableName": "my-table" } } }</code></p><p>Each attribute in the message payload will be written to a separate column in the DynamoDB database.</p>
- */
-@property (nonatomic, strong) AWSIoTPutItemInput * _Nullable putItem;
-
-/**
- <p>The ARN of the IAM role that grants access to the DynamoDB table.</p>
- */
-@property (nonatomic, strong) NSString * _Nullable roleArn;
-
-@end
-
-/**
- <p>Describes an action that writes data to an Amazon Elasticsearch Service domain.</p>
+ <p>Describes an action that writes data to an Amazon Elasticsearch Service; domain.</p>
  Required parameters: [roleArn, endpoint, index, type, id]
  */
 @interface AWSIoTElasticsearchAction : AWSModel
@@ -1435,11 +1198,6 @@ typedef NS_ENUM(NSInteger, AWSIoTMessageFormat) {
  <p>The IAM role that grants access to the Amazon Kinesis Firehost stream.</p>
  */
 @property (nonatomic, strong) NSString * _Nullable roleArn;
-
-/**
- <p>A character separator that will be used to separate records written to the Firehose stream. Valid values are: '\n' (newline), '\t' (tab), '\r\n' (Windows newline), ',' (comma).</p>
- */
-@property (nonatomic, strong) NSString * _Nullable separator;
 
 @end
 
@@ -1802,47 +1560,6 @@ typedef NS_ENUM(NSInteger, AWSIoTMessageFormat) {
 @end
 
 /**
- <p>The input to the ListOutgoingCertificates operation.</p>
- */
-@interface AWSIoTListOutgoingCertificatesRequest : AWSRequest
-
-
-/**
- <p>Specifies the order for results. If True, the results are returned in ascending order, based on the creation date.</p>
- */
-@property (nonatomic, strong) NSNumber * _Nullable ascendingOrder;
-
-/**
- <p>The marker for the next set of results.</p>
- */
-@property (nonatomic, strong) NSString * _Nullable marker;
-
-/**
- <p>The result page size.</p>
- */
-@property (nonatomic, strong) NSNumber * _Nullable pageSize;
-
-@end
-
-/**
- <p>The output from the ListOutgoingCertificates operation.</p>
- */
-@interface AWSIoTListOutgoingCertificatesResponse : AWSModel
-
-
-/**
- <p>The marker for the next set of results.</p>
- */
-@property (nonatomic, strong) NSString * _Nullable nextMarker;
-
-/**
- <p>The certificates that are being transfered but not yet accepted.</p>
- */
-@property (nonatomic, strong) NSArray<AWSIoTOutgoingCertificate *> * _Nullable outgoingCertificates;
-
-@end
-
-/**
  <p>The input for the ListPolicies operation.</p>
  */
 @interface AWSIoTListPoliciesRequest : AWSRequest
@@ -1880,53 +1597,6 @@ typedef NS_ENUM(NSInteger, AWSIoTMessageFormat) {
  <p>The descriptions of the policies.</p>
  */
 @property (nonatomic, strong) NSArray<AWSIoTPolicy *> * _Nullable policies;
-
-@end
-
-/**
- <p>The input for the ListPolicyPrincipals operation.</p>
- Required parameters: [policyName]
- */
-@interface AWSIoTListPolicyPrincipalsRequest : AWSRequest
-
-
-/**
- <p>Specifies the order for results. If true, the results are returned in ascending creation order.</p>
- */
-@property (nonatomic, strong) NSNumber * _Nullable ascendingOrder;
-
-/**
- <p>The marker for the next set of results.</p>
- */
-@property (nonatomic, strong) NSString * _Nullable marker;
-
-/**
- <p>The result page size.</p>
- */
-@property (nonatomic, strong) NSNumber * _Nullable pageSize;
-
-/**
- <p>The policy name.</p>
- */
-@property (nonatomic, strong) NSString * _Nullable policyName;
-
-@end
-
-/**
- <p>The output from the ListPolicyPrincipals operation.</p>
- */
-@interface AWSIoTListPolicyPrincipalsResponse : AWSModel
-
-
-/**
- <p>The marker for the next set of results, or null if there are no additional results.</p>
- */
-@property (nonatomic, strong) NSString * _Nullable nextMarker;
-
-/**
- <p>The descriptions of the principals.</p>
- */
-@property (nonatomic, strong) NSArray<NSString *> * _Nullable principals;
 
 @end
 
@@ -2012,12 +1682,12 @@ typedef NS_ENUM(NSInteger, AWSIoTMessageFormat) {
 
 
 /**
- <p>The maximum number of results to return in this operation.</p>
+ <p>The maximum number of principals to return.</p>
  */
 @property (nonatomic, strong) NSNumber * _Nullable maxResults;
 
 /**
- <p>The token for the next set of results, or <b>null</b> if there are no additional results.</p>
+ <p>A token used to retrieve the next value.</p>
  */
 @property (nonatomic, strong) NSString * _Nullable nextToken;
 
@@ -2035,7 +1705,7 @@ typedef NS_ENUM(NSInteger, AWSIoTMessageFormat) {
 
 
 /**
- <p>The token for the next set of results, or <b>null</b> if there are no additional results.</p>
+ <p>A token used to retrieve the next value.</p>
  */
 @property (nonatomic, strong) NSString * _Nullable nextToken;
 
@@ -2067,50 +1737,9 @@ typedef NS_ENUM(NSInteger, AWSIoTMessageFormat) {
 
 
 /**
- <p>The principals associated with the thing.</p>
+ <p>The principals.</p>
  */
 @property (nonatomic, strong) NSArray<NSString *> * _Nullable principals;
-
-@end
-
-/**
- <p>The input for the ListThingTypes operation.</p>
- */
-@interface AWSIoTListThingTypesRequest : AWSRequest
-
-
-/**
- <p>The maximum number of results to return in this operation.</p>
- */
-@property (nonatomic, strong) NSNumber * _Nullable maxResults;
-
-/**
- <p>The token for the next set of results, or <b>null</b> if there are no additional results.</p>
- */
-@property (nonatomic, strong) NSString * _Nullable nextToken;
-
-/**
- <p>The name of the thing type.</p>
- */
-@property (nonatomic, strong) NSString * _Nullable thingTypeName;
-
-@end
-
-/**
- <p>The output for the ListThingTypes operation.</p>
- */
-@interface AWSIoTListThingTypesResponse : AWSModel
-
-
-/**
- <p>The token for the next set of results, or <b>null</b> if there are no additional results.</p>
- */
-@property (nonatomic, strong) NSString * _Nullable nextToken;
-
-/**
- <p>The thing types.</p>
- */
-@property (nonatomic, strong) NSArray<AWSIoTThingTypeDefinition *> * _Nullable thingTypes;
 
 @end
 
@@ -2121,29 +1750,24 @@ typedef NS_ENUM(NSInteger, AWSIoTMessageFormat) {
 
 
 /**
- <p>The attribute name used to search for things.</p>
+ <p>The attribute name.</p>
  */
 @property (nonatomic, strong) NSString * _Nullable attributeName;
 
 /**
- <p>The attribute value used to search for things.</p>
+ <p>The attribute value.</p>
  */
 @property (nonatomic, strong) NSString * _Nullable attributeValue;
 
 /**
- <p>The maximum number of results to return in this operation.</p>
+ <p>The maximum number of results.</p>
  */
 @property (nonatomic, strong) NSNumber * _Nullable maxResults;
 
 /**
- <p>The token for the next set of results, or <b>null</b> if there are no additional results.</p>
+ <p>The token for the next value.</p>
  */
 @property (nonatomic, strong) NSString * _Nullable nextToken;
-
-/**
- <p>The name of the thing type used to search for things.</p>
- */
-@property (nonatomic, strong) NSString * _Nullable thingTypeName;
 
 @end
 
@@ -2154,7 +1778,7 @@ typedef NS_ENUM(NSInteger, AWSIoTMessageFormat) {
 
 
 /**
- <p>The token for the next set of results, or <b>null</b> if there are no additional results.</p>
+ <p>A token used to retrieve the next value.</p>
  */
 @property (nonatomic, strong) NSString * _Nullable nextToken;
 
@@ -2231,44 +1855,6 @@ typedef NS_ENUM(NSInteger, AWSIoTMessageFormat) {
 @end
 
 /**
- <p>A certificate that has been transfered but not yet accepted.</p>
- */
-@interface AWSIoTOutgoingCertificate : AWSModel
-
-
-/**
- <p>The certificate ARN.</p>
- */
-@property (nonatomic, strong) NSString * _Nullable certificateArn;
-
-/**
- <p>The certificate ID.</p>
- */
-@property (nonatomic, strong) NSString * _Nullable certificateId;
-
-/**
- <p>The certificate creation date.</p>
- */
-@property (nonatomic, strong) NSDate * _Nullable creationDate;
-
-/**
- <p>The date the transfer was initiated.</p>
- */
-@property (nonatomic, strong) NSDate * _Nullable transferDate;
-
-/**
- <p>The transfer message.</p>
- */
-@property (nonatomic, strong) NSString * _Nullable transferMessage;
-
-/**
- <p>The AWS account to which the transfer was made.</p>
- */
-@property (nonatomic, strong) NSString * _Nullable transferredTo;
-
-@end
-
-/**
  <p>Describes an AWS IoT policy.</p>
  */
 @interface AWSIoTPolicy : AWSModel
@@ -2310,30 +1896,11 @@ typedef NS_ENUM(NSInteger, AWSIoTMessageFormat) {
 @end
 
 /**
- <p>The input for the DynamoActionVS action that specifies the DynamoDB table to which the message data will be written.</p>
- Required parameters: [tableName]
- */
-@interface AWSIoTPutItemInput : AWSModel
-
-
-/**
- <p>The table where the message data will be written</p>
- */
-@property (nonatomic, strong) NSString * _Nullable tableName;
-
-@end
-
-/**
  <p>The input to the RegisterCACertificate operation.</p>
  Required parameters: [caCertificate, verificationCertificate]
  */
 @interface AWSIoTRegisterCACertificateRequest : AWSRequest
 
-
-/**
- <p>Allows this CA certificate to be used for auto registration of device certificates.</p>
- */
-@property (nonatomic, strong) NSNumber * _Nullable allowAutoRegistration;
 
 /**
  <p>The CA certificate.</p>
@@ -2391,11 +1958,6 @@ typedef NS_ENUM(NSInteger, AWSIoTMessageFormat) {
  <p>A boolean value that specifies if the CA certificate is set to active.</p>
  */
 @property (nonatomic, strong) NSNumber * _Nullable setAsActive;
-
-/**
- 
- */
-@property (nonatomic, assign) AWSIoTCertificateStatus status;
 
 @end
 
@@ -2485,11 +2047,6 @@ typedef NS_ENUM(NSInteger, AWSIoTMessageFormat) {
  <p>The Amazon S3 bucket.</p>
  */
 @property (nonatomic, strong) NSString * _Nullable bucketName;
-
-/**
- <p>The Amazon S3 canned ACL that controls access to the object identified by the object key. For more information, see <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl">S3 canned ACLs</a>.</p>
- */
-@property (nonatomic, assign) AWSIoTCannedAccessControlList cannedAcl;
 
 /**
  <p>The object key.</p>
@@ -2585,13 +2142,13 @@ typedef NS_ENUM(NSInteger, AWSIoTMessageFormat) {
 @end
 
 /**
- <p>The properties of the thing, including thing name, thing type name, and a list of thing attributes.</p>
+ <p>Describes a thing attribute.</p>
  */
 @interface AWSIoTThingAttribute : AWSModel
 
 
 /**
- <p>A list of thing attributes which are name-value pairs.</p>
+ <p>The attributes.</p>
  */
 @property (nonatomic, strong) NSDictionary<NSString *, NSString *> * _Nullable attributes;
 
@@ -2599,80 +2156,6 @@ typedef NS_ENUM(NSInteger, AWSIoTMessageFormat) {
  <p>The name of the thing.</p>
  */
 @property (nonatomic, strong) NSString * _Nullable thingName;
-
-/**
- <p>The name of the thing type, if the thing has been associated with a type.</p>
- */
-@property (nonatomic, strong) NSString * _Nullable thingTypeName;
-
-/**
- <p>The version of the thing record in the registry.</p>
- */
-@property (nonatomic, strong) NSNumber * _Nullable version;
-
-@end
-
-/**
- <p>The definition of the thing type, including thing type name and description.</p>
- */
-@interface AWSIoTThingTypeDefinition : AWSModel
-
-
-/**
- <p>The ThingTypeMetadata contains additional information about the thing type including: creation date and time, a value indicating whether the thing type is deprecated, and a date and time when time was deprecated.</p>
- */
-@property (nonatomic, strong) AWSIoTThingTypeMetadata * _Nullable thingTypeMetadata;
-
-/**
- <p>The name of the thing type.</p>
- */
-@property (nonatomic, strong) NSString * _Nullable thingTypeName;
-
-/**
- <p>The ThingTypeProperties for the thing type.</p>
- */
-@property (nonatomic, strong) AWSIoTThingTypeProperties * _Nullable thingTypeProperties;
-
-@end
-
-/**
- <p>The ThingTypeMetadata contains additional information about the thing type including: creation date and time, a value indicating whether the thing type is deprecated, and a date and time when time was deprecated.</p>
- */
-@interface AWSIoTThingTypeMetadata : AWSModel
-
-
-/**
- <p>The date and time when the thing type was created.</p>
- */
-@property (nonatomic, strong) NSDate * _Nullable creationDate;
-
-/**
- <p>Whether the thing type is deprecated. If <b>true</b>, no new things could be associated with this type.</p>
- */
-@property (nonatomic, strong) NSNumber * _Nullable deprecated;
-
-/**
- <p>The date and time when the thing type was deprecated.</p>
- */
-@property (nonatomic, strong) NSDate * _Nullable deprecationDate;
-
-@end
-
-/**
- <p>The ThingTypeProperties contains information about the thing type including: a thing type description, and a list of searchable thing attribute names.</p>
- */
-@interface AWSIoTThingTypeProperties : AWSModel
-
-
-/**
- <p>A list of searchable thing attribute names.</p>
- */
-@property (nonatomic, strong) NSArray<NSString *> * _Nullable searchableAttributes;
-
-/**
- <p>The description of the thing type.</p>
- */
-@property (nonatomic, strong) NSString * _Nullable thingTypeDescription;
 
 @end
 
@@ -2858,7 +2341,7 @@ typedef NS_ENUM(NSInteger, AWSIoTMessageFormat) {
 
 /**
  <p>The input to the UpdateCACertificate operation.</p>
- Required parameters: [certificateId]
+ Required parameters: [certificateId, newStatus]
  */
 @interface AWSIoTUpdateCACertificateRequest : AWSRequest
 
@@ -2869,12 +2352,7 @@ typedef NS_ENUM(NSInteger, AWSIoTMessageFormat) {
 @property (nonatomic, strong) NSString * _Nullable certificateId;
 
 /**
- <p>The new value for the auto registration status. Valid values are: "ENABLE" or "DISABLE".</p>
- */
-@property (nonatomic, assign) AWSIoTAutoRegistrationStatus latestAutoRegistrationStatus;
-
-/**
- <p>The updated status of the CA certificate.</p><p><b>Note:</b> The status value REGISTER_INACTIVE is deprecated and should not be used.</p>
+ <p>The updated status of the CA certificate.</p>
  */
 @property (nonatomic, assign) AWSIoTCACertificateStatus latestStatus;
 
@@ -2893,7 +2371,7 @@ typedef NS_ENUM(NSInteger, AWSIoTMessageFormat) {
 @property (nonatomic, strong) NSString * _Nullable certificateId;
 
 /**
- <p>The new status.</p><p><b>Note:</b> Setting the status to PENDING_TRANSFER will result in an exception being thrown. PENDING_TRANSFER is a status used internally by AWS IoT. It is not intended for developer use.</p><p><b>Note:</b> The status value REGISTER_INACTIVE is deprecated and should not be used.</p>
+ <p>The new status.</p><p><b>Note:</b> Setting the status to PENDING_TRANSFER will result in an exception being thrown. PENDING_TRANSFER is a status used internally by AWS IoT. It is not intended for developer use.</p>
  */
 @property (nonatomic, assign) AWSIoTCertificateStatus latestStatus;
 
@@ -2901,35 +2379,20 @@ typedef NS_ENUM(NSInteger, AWSIoTMessageFormat) {
 
 /**
  <p>The input for the UpdateThing operation.</p>
- Required parameters: [thingName]
+ Required parameters: [thingName, attributePayload]
  */
 @interface AWSIoTUpdateThingRequest : AWSRequest
 
 
 /**
- <p>A list of thing attributes, a JSON string containing name-value pairs. For example:</p><p><code>{\"attributes\":{\"name1\":\"value2\"}})</code></p><p>This data is used to add new attributes or update existing attributes.</p>
+ <p>The attribute payload, a JSON string containing up to three key-value pairs (for example, {\"attributes\":{\"string1\":\"string2\"}}).</p>
  */
 @property (nonatomic, strong) AWSIoTAttributePayload * _Nullable attributePayload;
 
 /**
- <p>The expected version of the thing record in the registry. If the version of the record in the registry does not match the expected version specified in the request, the <code>UpdateThing</code> request is rejected with a <code>VersionConflictException</code>.</p>
- */
-@property (nonatomic, strong) NSNumber * _Nullable expectedVersion;
-
-/**
- <p>Remove a thing type association. If <b>true</b>, the assocation is removed.</p>
- */
-@property (nonatomic, strong) NSNumber * _Nullable removeThingType;
-
-/**
- <p>The name of the thing to update.</p>
+ <p>The thing name.</p>
  */
 @property (nonatomic, strong) NSString * _Nullable thingName;
-
-/**
- <p>The name of the thing type.</p>
- */
-@property (nonatomic, strong) NSString * _Nullable thingTypeName;
 
 @end
 

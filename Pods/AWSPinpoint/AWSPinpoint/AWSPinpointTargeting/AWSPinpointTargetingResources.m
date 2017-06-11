@@ -14,7 +14,7 @@
 //
 
 #import "AWSPinpointTargetingResources.h"
-#import <AWSCore/AWSCocoaLumberjack.h>
+#import <AWSCore/AWSLogging.h>
 
 @interface AWSPinpointTargetingResources ()
 
@@ -48,7 +48,7 @@
                                                                   error:&error];
         if (_definitionDictionary == nil) {
             if (error) {
-                AWSDDLogError(@"Failed to parse JSON service definition: %@",error);
+                AWSLogError(@"Failed to parse JSON service definition: %@",error);
             }
         }
     }

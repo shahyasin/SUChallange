@@ -98,8 +98,7 @@ static NSDictionary *errorCodeDictionary = nil;
                                                        error:error];
         }
     }
-	
-    return responseObject;
+	    return responseObject;
 }
 
 @end

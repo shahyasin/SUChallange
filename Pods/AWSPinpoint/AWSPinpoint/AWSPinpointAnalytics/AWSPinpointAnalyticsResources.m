@@ -14,7 +14,7 @@
 //
 
 #import "AWSPinpointAnalyticsResources.h"
-#import <AWSCore/AWSCocoaLumberjack.h>
+#import <AWSCore/AWSLogging.h>
 
 @interface AWSPinpointAnalyticsResources ()
 
@@ -48,7 +48,7 @@
                                                                   error:&error];
         if (_definitionDictionary == nil) {
             if (error) {
-                AWSDDLogError(@"Failed to parse JSON service definition: %@",error);
+                AWSLogError(@"Failed to parse JSON service definition: %@",error);
             }
         }
     }

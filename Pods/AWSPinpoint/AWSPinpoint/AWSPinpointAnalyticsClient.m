@@ -170,7 +170,7 @@ NSString *const AWSPinpointAnalyticsClientErrorDomain = @"com.amazonaws.AWSPinpo
 
 -(AWSTask *) recordEvent:(AWSPinpointEvent *) theEvent {
     if (theEvent == nil) {
-        AWSDDLogError(@"Nil event provided to recordEvent");
+        AWSLogError(@"Nil event provided to recordEvent");
         return [AWSTask taskWithError:[NSError errorWithDomain:AWSPinpointAnalyticsClientErrorDomain code:0 userInfo:@{@"InvalidParameter":@"Nil event provided to recordEvent"}]];
     }
     

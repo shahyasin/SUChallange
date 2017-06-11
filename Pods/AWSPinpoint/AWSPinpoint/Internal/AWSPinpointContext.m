@@ -100,21 +100,21 @@ static NSString *const AWSPinpointContextKeychainUniqueIdKey = @"com.amazonaws.A
             });
             deviceUniqueId = [self.keychain stringForKey:AWSPinpointContextKeychainUniqueIdKey];
             if (deviceUniqueId) {
-                AWSDDLogVerbose(@"Merged Legacy Pinpoint UniqueId to Keychain: %@", deviceUniqueId);
+                AWSLogVerbose(@"Merged Legacy Pinpoint UniqueId to Keychain: %@", deviceUniqueId);
                 //Delete old file
                 if ([self removeLegacyFileWithConfiguration:self.configuration]) {
-                    AWSDDLogVerbose(@"Cannot remove legacy preferences file.");
+                    AWSLogVerbose(@"Cannot remove legacy preferences file.");
                 }
             } else {
-                AWSDDLogError(@"Failed to merge UniqueId in Keychain");
-                AWSDDLogVerbose(@"Fallback: merge UniqueId to NSUserDefaults: %@", deviceUniqueId);
+                AWSLogError(@"Failed to merge UniqueId in Keychain");
+                AWSLogVerbose(@"Fallback: merge UniqueId to NSUserDefaults: %@", deviceUniqueId);
                 //Failed to save to Keychain, fallback to NSUserDefaults
                 deviceUniqueId = legacyUniqueId;
                 [[NSUserDefaults standardUserDefaults] setObject:deviceUniqueId forKey:AWSPinpointContextKeychainUniqueIdKey];
                 [[NSUserDefaults standardUserDefaults] synchronize];
                 //Delete old file
                 if ([self removeLegacyFileWithConfiguration:self.configuration]) {
-                    AWSDDLogVerbose(@"Cannot remove legacy preferences file.");
+                    AWSLogVerbose(@"Cannot remove legacy preferences file.");
                 }
             }
         } else {
@@ -127,7 +127,7 @@ static NSString *const AWSPinpointContextKeychainUniqueIdKey = @"com.amazonaws.A
                                       forKey:AWSPinpointContextKeychainUniqueIdKey];
                 });
                 if ([self.keychain stringForKey:AWSPinpointContextKeychainUniqueIdKey]) {
-                    AWSDDLogVerbose(@"Merged Pinpoint UniqueId to Keychain: %@", deviceUniqueId);
+                    AWSLogVerbose(@"Merged Pinpoint UniqueId to Keychain: %@", deviceUniqueId);
                     //Successful save to keychain, delete from UserDefaults
                     [[NSUserDefaults standardUserDefaults] removeObjectForKey:AWSPinpointContextKeychainUniqueIdKey];
                     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -141,10 +141,10 @@ static NSString *const AWSPinpointContextKeychainUniqueIdKey = @"com.amazonaws.A
                 });
                 deviceUniqueId = [self.keychain stringForKey:AWSPinpointContextKeychainUniqueIdKey];
                 if (deviceUniqueId) {
-                    AWSDDLogVerbose(@"Created new Pinpoint UniqueId and saved to Keychain: %@", deviceUniqueId);
+                    AWSLogVerbose(@"Created new Pinpoint UniqueId and saved to Keychain: %@", deviceUniqueId);
                 } else {
-                    AWSDDLogError(@"Failed to generate UniqueId in Keychain");
-                    AWSDDLogVerbose(@"Fallback: created new Pinpoint UniqueId and saved to NSUserDefaults: %@", deviceUniqueId);
+                    AWSLogError(@"Failed to generate UniqueId in Keychain");
+                    AWSLogVerbose(@"Fallback: created new Pinpoint UniqueId and saved to NSUserDefaults: %@", deviceUniqueId);
                     //Fallback to save to UserDefaults
                     deviceUniqueId = [[NSUUID UUID] UUIDString];
                     [[NSUserDefaults standardUserDefaults] setObject:deviceUniqueId forKey:AWSPinpointContextKeychainUniqueIdKey];

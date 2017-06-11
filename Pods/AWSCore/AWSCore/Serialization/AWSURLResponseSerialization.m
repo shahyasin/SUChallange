@@ -12,9 +12,10 @@
 // express or implied. See the License for the specific language governing
 // permissions and limitations under the License.
 //
+
 #import "AWSURLResponseSerialization.h"
 
-#import "AWSCocoaLumberjack.h"
+#import "AWSLogging.h"
 
 #import "AWSService.h"
 #import "AWSValidation.h"
@@ -39,7 +40,7 @@
 
         _serviceDefinitionJSON = JSONDefinition;
         if (_serviceDefinitionJSON == nil) {
-            AWSDDLogError(@"serviceDefinitionJSON is nil.");
+            AWSLogError(@"serviceDefinitionJSON of is nil.");
             return nil;
         }
         _actionName = actionName;
@@ -55,15 +56,15 @@
                  currentRequest:(NSURLRequest *)currentRequest
                            data:(id)data
                           error:(NSError *__autoreleasing *)error {
-    if([AWSDDLog sharedInstance].logLevel & AWSDDLogFlagDebug){
+    if ([AWSLogger defaultLogger].logLevel >= AWSLogLevelDebug) {
         if ([data isKindOfClass:[NSData class]]) {
             if ([data length] <= 100 * 1024) {
-                AWSDDLogDebug(@"Response body:\n%@", [[NSString alloc] initWithData:data
-                                                                           encoding:NSUTF8StringEncoding]);
+                AWSLogDebug(@"Response body:\n%@", [[NSString alloc] initWithData:data
+                                                                         encoding:NSUTF8StringEncoding]);
             } else {
-                AWSDDLogDebug(@"Response body (Partial data. The first 100KB is displayed.):\n%@", [[NSString alloc] initWithData:[data subdataWithRange:NSMakeRange(0, 100 * 1024)]
-                                                                                                                         encoding:NSUTF8StringEncoding]);
-                
+                AWSLogDebug(@"Response body (Partial data. The first 100KB is displayed.):\n%@", [[NSString alloc] initWithData:[data subdataWithRange:NSMakeRange(0, 100 * 1024)]
+                                                                                                                       encoding:NSUTF8StringEncoding]);
+
             }
         }
     }
@@ -140,7 +141,7 @@
 
         _serviceDefinitionJSON = JSONDefinition;
         if (_serviceDefinitionJSON == nil) {
-            AWSDDLogError(@"serviceDefinitionJSON of is nil.");
+            AWSLogError(@"serviceDefinitionJSON of is nil.");
             return nil;
         }
         _actionName = actionName;
@@ -232,19 +233,19 @@
                  currentRequest:(NSURLRequest *)currentRequest
                            data:(id)data
                           error:(NSError *__autoreleasing *)error {
-    if([AWSDDLog sharedInstance].logLevel & AWSDDLogFlagDebug){
+    if ([AWSLogger defaultLogger].logLevel >= AWSLogLevelDebug) {
         if ([data isKindOfClass:[NSData class]]) {
             if ([data length] <= 100 * 1024) {
-                AWSDDLogDebug(@"Response body:\n%@", [[NSString alloc] initWithData:data
-                                                                           encoding:NSUTF8StringEncoding]);
+                AWSLogDebug(@"Response body:\n%@", [[NSString alloc] initWithData:data
+                                                                         encoding:NSUTF8StringEncoding]);
             } else {
-                AWSDDLogDebug(@"Response body (Partial data. The first 100KB is displayed.):\n%@", [[NSString alloc] initWithData:[data subdataWithRange:NSMakeRange(0, 100 * 1024)]
-                                                                                                                         encoding:NSUTF8StringEncoding]);
-                
+                AWSLogDebug(@"Response body (Partial data. The first 100KB is displayed.):\n%@", [[NSString alloc] initWithData:[data subdataWithRange:NSMakeRange(0, 100 * 1024)]
+                                                                                                                       encoding:NSUTF8StringEncoding]);
+
             }
         }
     }
-    
+
     if (![self validateResponse:response fromRequest:currentRequest data:data error:error]) {
         return nil;
     }

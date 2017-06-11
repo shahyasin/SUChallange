@@ -23,7 +23,7 @@
 #import "AWSCognitoConstants.h"
 #import "AWSCognitoDataset_Internal.h"
 #import "AWSCognitoRecord_Internal.h"
-#import <AWSCore/AWSCocoaLumberjack.h>
+#import <AWSCore/AWSLogging.h>
 #import <AWSCore/AWSCredentialsProvider.h>
 #import "AWSCognitoConflict_Internal.h"
 #import "AWSCognitoSyncService.h"
@@ -68,7 +68,7 @@
     if(sqlite3_open([[self filePath] UTF8String], &_sqlite) != SQLITE_OK)
     {
         sqlite3_close(_sqlite);
-        AWSDDLogInfo(@"SQLite setup failed.");
+        AWSLogInfo(@"SQLite setup failed.");
 
         return;
     }
@@ -85,11 +85,11 @@
             sqlite3_bind_text(statement, 1, [[self identityId] UTF8String], -1, SQLITE_TRANSIENT);
             
             if(SQLITE_DONE != sqlite3_step(statement)) {
-                AWSDDLogError(@"Error deleting record data: %s", sqlite3_errmsg(self.sqlite));
+                AWSLogError(@"Error deleting record data: %s", sqlite3_errmsg(self.sqlite));
             }
         }
         else {
-            AWSDDLogError(@"Error deleting dataset metadata: %s", sqlite3_errmsg(self.sqlite));
+            AWSLogError(@"Error deleting dataset metadata: %s", sqlite3_errmsg(self.sqlite));
         }
         sqlite3_reset(statement);
         sqlite3_finalize(statement);
@@ -99,12 +99,12 @@
         if(sqlite3_prepare_v2(self.sqlite, [deleteString UTF8String], -1, &statement, NULL) == SQLITE_OK) {
             sqlite3_bind_text(statement, 1, [[self identityId] UTF8String], -1, SQLITE_TRANSIENT);
             if(SQLITE_DONE != sqlite3_step(statement)) {
-                AWSDDLogError(@"Error deleting dataset metadata: %s", sqlite3_errmsg(self.sqlite));
+                AWSLogError(@"Error deleting dataset metadata: %s", sqlite3_errmsg(self.sqlite));
             }
         }
         else
         {
-            AWSDDLogError(@"Error deleting dataset metadata: %s", sqlite3_errmsg(self.sqlite));
+            AWSLogError(@"Error deleting dataset metadata: %s", sqlite3_errmsg(self.sqlite));
         }
         sqlite3_reset(statement);
         sqlite3_finalize(statement);
@@ -146,7 +146,7 @@
         if(sqlite3_exec(_sqlite, [createString UTF8String], NULL, NULL, &error) != SQLITE_OK)
         {
             sqlite3_close(_sqlite);
-            AWSDDLogInfo(@"SQLite setup failed: %s", error);
+            AWSLogInfo(@"SQLite setup failed: %s", error);
             
             return;
         }
@@ -175,7 +175,7 @@
         if(sqlite3_exec(_sqlite, [createString2 UTF8String], NULL, NULL, &error) != SQLITE_OK)
         {
             sqlite3_close(_sqlite);
-            AWSDDLogInfo(@"SQLite setup failed: %s", error);
+            AWSLogInfo(@"SQLite setup failed: %s", error);
             
             return;
         }
@@ -197,7 +197,7 @@
                                AWSCognitoLastModifiedFieldName
                                ];
         
-        AWSDDLogDebug(@"sqlString = '%@'", sqlString);
+        AWSLogDebug(@"sqlString = '%@'", sqlString);
         
         sqlite3_stmt *statement;
         
@@ -214,12 +214,12 @@
             
             if((SQLITE_DONE != status) && (SQLITE_CONSTRAINT != status))
             {
-                AWSDDLogInfo(@"Error initializing sync count: %s", sqlite3_errmsg(self.sqlite));
+                AWSLogInfo(@"Error initializing sync count: %s", sqlite3_errmsg(self.sqlite));
             }
         }
         else
         {
-            AWSDDLogInfo(@"Error initializing sync count: %s", sqlite3_errmsg(self.sqlite));
+            AWSLogInfo(@"Error initializing sync count: %s", sqlite3_errmsg(self.sqlite));
         }
         sqlite3_reset(statement);
         sqlite3_finalize(statement);
@@ -243,7 +243,7 @@
                            AWSCognitoDefaultSqliteMetadataTableName,
                            AWSCognitoTableIdentityKeyName];
         
-        AWSDDLogDebug(@"query = '%@'", query);
+        AWSLogDebug(@"query = '%@'", query);
         
         sqlite3_stmt *statement;
         if(sqlite3_prepare_v2(self.sqlite, [query UTF8String], -1, &statement, NULL) == SQLITE_OK)
@@ -276,7 +276,7 @@
         }
         else
         {
-            AWSDDLogInfo(@"Error creating query statement: %s", sqlite3_errmsg(self.sqlite));
+            AWSLogInfo(@"Error creating query statement: %s", sqlite3_errmsg(self.sqlite));
             if(error != nil)
             {
                 *error = [AWSCognitoUtil errorLocalDataStorageFailed:[NSString stringWithFormat:@"%s", sqlite3_errmsg(self.sqlite)]];
@@ -304,7 +304,7 @@
                            AWSCognitoTableIdentityKeyName,
                            AWSCognitoDatasetFieldName];
         
-        AWSDDLogDebug(@"query = '%@'", query);
+        AWSLogDebug(@"query = '%@'", query);
         
         sqlite3_stmt *statement;
         if(sqlite3_prepare_v2(self.sqlite, [query UTF8String], -1, &statement, NULL) == SQLITE_OK)
@@ -331,7 +331,7 @@
         }
         else
         {
-            AWSDDLogInfo(@"Error creating query statement: %s", sqlite3_errmsg(self.sqlite));
+            AWSLogInfo(@"Error creating query statement: %s", sqlite3_errmsg(self.sqlite));
             if(error != nil)
             {
                 *error = [AWSCognitoUtil errorLocalDataStorageFailed:[NSString stringWithFormat:@"%s", sqlite3_errmsg(self.sqlite)]];
@@ -367,7 +367,7 @@
             
             if((SQLITE_DONE != status) && (SQLITE_CONSTRAINT != status))
             {
-                AWSDDLogInfo(@"Error while updating dataset metadata: %s", sqlite3_errmsg(self.sqlite));
+                AWSLogInfo(@"Error while updating dataset metadata: %s", sqlite3_errmsg(self.sqlite));
                 success = NO;
                 if(error != nil)
                 {
@@ -378,7 +378,7 @@
         }
         else
         {
-            AWSDDLogInfo(@"Error while updating dataset metadata: %s", sqlite3_errmsg(self.sqlite));
+            AWSLogInfo(@"Error while updating dataset metadata: %s", sqlite3_errmsg(self.sqlite));
             success = NO;
             if(error != nil)
             {
@@ -427,7 +427,7 @@
                 
                 if((SQLITE_DONE != status) && (SQLITE_CONSTRAINT != status))
                 {
-                    AWSDDLogInfo(@"Error while updating sync count: %s", sqlite3_errmsg(self.sqlite));
+                    AWSLogInfo(@"Error while updating sync count: %s", sqlite3_errmsg(self.sqlite));
                     success = NO;
                 }
                 sqlite3_reset(statement);
@@ -435,7 +435,7 @@
         }
         else
         {
-            AWSDDLogInfo(@"Error updating sync count: %s", sqlite3_errmsg(self.sqlite));
+            AWSLogInfo(@"Error updating sync count: %s", sqlite3_errmsg(self.sqlite));
         }
         sqlite3_finalize(statement);
     });
@@ -459,7 +459,7 @@
                            AWSCognitoTableDatasetKeyName
                            ];
         
-        AWSDDLogDebug(@"query = '%@'", query);
+        AWSLogDebug(@"query = '%@'", query);
         
         sqlite3_stmt *statement;
         if(sqlite3_prepare_v2(self.sqlite, [query UTF8String], -1, &statement, NULL) == SQLITE_OK)
@@ -493,7 +493,7 @@
         }
         else
         {
-            AWSDDLogInfo(@"Error creating query statement: %s", sqlite3_errmsg(self.sqlite));
+            AWSLogInfo(@"Error creating query statement: %s", sqlite3_errmsg(self.sqlite));
             if(error != nil)
             {
                 *error = [AWSCognitoUtil errorLocalDataStorageFailed:[NSString stringWithFormat:@"%s", sqlite3_errmsg(self.sqlite)]];
@@ -576,7 +576,7 @@
         }
         else
         {
-            AWSDDLogInfo(@"Error creating query statement: %s", sqlite3_errmsg(self.sqlite));
+            AWSLogInfo(@"Error creating query statement: %s", sqlite3_errmsg(self.sqlite));
             if(error != nil)
             {
                 *error = [AWSCognitoUtil errorLocalDataStorageFailed:[NSString stringWithFormat:@"%s", sqlite3_errmsg(self.sqlite)]];
@@ -646,7 +646,7 @@
         }
         else
         {
-            AWSDDLogInfo(@"Error creating query statement: %s", sqlite3_errmsg(self.sqlite));
+            AWSLogInfo(@"Error creating query statement: %s", sqlite3_errmsg(self.sqlite));
         }
 
         sqlite3_reset(statement);
@@ -733,14 +733,14 @@
                 result = YES;
             }
             else {
-                AWSDDLogInfo(@"Error while inserting data: %s", sqlite3_errmsg(self.sqlite));
+                AWSLogInfo(@"Error while inserting data: %s", sqlite3_errmsg(self.sqlite));
                 if(error != nil) {
                     *error = [AWSCognitoUtil errorLocalDataStorageFailed:[NSString stringWithFormat:@"%s", sqlite3_errmsg(self.sqlite)]];
                 }
             }
         }
         else {
-            AWSDDLogInfo(@"Error creating insert statement: %s", sqlite3_errmsg(self.sqlite));
+            AWSLogInfo(@"Error creating insert statement: %s", sqlite3_errmsg(self.sqlite));
             if(error != nil) {
                 *error = [AWSCognitoUtil errorLocalDataStorageFailed:[NSString stringWithFormat:@"%s", sqlite3_errmsg(self.sqlite)]];
             }
@@ -825,7 +825,7 @@
             sqlite3_bind_text(statement, 14, datasetNameChars, -1, SQLITE_TRANSIENT);
             
             if(SQLITE_DONE != sqlite3_step(statement)) {
-                AWSDDLogInfo(@"Error while updating data: %s", sqlite3_errmsg(self.sqlite));
+                AWSLogInfo(@"Error while updating data: %s", sqlite3_errmsg(self.sqlite));
                 if(error != nil) {
                     *error = [AWSCognitoUtil errorLocalDataStorageFailed:[NSString stringWithFormat:@"%s", sqlite3_errmsg(self.sqlite)]];
                 }
@@ -837,7 +837,7 @@
             //if no updates were made error out
             if(numRows <1){
                 NSString *errorMsg = @"local value changed";
-                AWSDDLogInfo(@"Error while updating data: %@",errorMsg);
+                AWSLogInfo(@"Error while updating data: %@",errorMsg);
                 if(error != nil) {
                     *error = [AWSCognitoUtil errorLocalDataStorageFailed:errorMsg];
                 }
@@ -846,7 +846,7 @@
             }
         }
         else {
-            AWSDDLogInfo(@"Error creating update statement: %s", sqlite3_errmsg(self.sqlite));
+            AWSLogInfo(@"Error creating update statement: %s", sqlite3_errmsg(self.sqlite));
             if(error != nil) {
                 *error = [AWSCognitoUtil errorLocalDataStorageFailed:[NSString stringWithFormat:@"%s", sqlite3_errmsg(self.sqlite)]];
             }
@@ -903,7 +903,7 @@
             
             
             if(SQLITE_DONE != sqlite3_step(statement)) {
-                AWSDDLogInfo(@"Error while inserting data: %s", sqlite3_errmsg(self.sqlite));
+                AWSLogInfo(@"Error while inserting data: %s", sqlite3_errmsg(self.sqlite));
                 if(error != nil) {
                     *error = [AWSCognitoUtil errorLocalDataStorageFailed:[NSString stringWithFormat:@"%s", sqlite3_errmsg(self.sqlite)]];
                 }
@@ -912,7 +912,7 @@
             }
         }
         else {
-            AWSDDLogInfo(@"Error creating insert statement: %s", sqlite3_errmsg(self.sqlite));
+            AWSLogInfo(@"Error creating insert statement: %s", sqlite3_errmsg(self.sqlite));
             if(error != nil) {
                 *error = [AWSCognitoUtil errorLocalDataStorageFailed:[NSString stringWithFormat:@"%s", sqlite3_errmsg(self.sqlite)]];
             }
@@ -1006,7 +1006,7 @@
             sqlite3_bind_text(statement, 14, datasetNameChars, -1, SQLITE_TRANSIENT);
             
             if(SQLITE_DONE != sqlite3_step(statement)){
-                AWSDDLogInfo(@"Error while updating data: %s", sqlite3_errmsg(self.sqlite));
+                AWSLogInfo(@"Error while updating data: %s", sqlite3_errmsg(self.sqlite));
                 if(error != nil)
                 {
                     *error = [AWSCognitoUtil errorLocalDataStorageFailed:[NSString stringWithFormat:@"%s", sqlite3_errmsg(self.sqlite)]];
@@ -1076,7 +1076,7 @@
             }
             else
             {
-                AWSDDLogInfo(@"Error while inserting data: %s", sqlite3_errmsg(self.sqlite));
+                AWSLogInfo(@"Error while inserting data: %s", sqlite3_errmsg(self.sqlite));
                 if(error != nil)
                 {
                     *error = [AWSCognitoUtil errorLocalDataStorageFailed:[NSString stringWithFormat:@"%s", sqlite3_errmsg(self.sqlite)]];
@@ -1085,7 +1085,7 @@
         }
         else
         {
-            AWSDDLogInfo(@"Error creating insert statement: %s", sqlite3_errmsg(self.sqlite));
+            AWSLogInfo(@"Error creating insert statement: %s", sqlite3_errmsg(self.sqlite));
             if(error != nil)
             {
                 *error = [AWSCognitoUtil errorLocalDataStorageFailed:[NSString stringWithFormat:@"%s", sqlite3_errmsg(self.sqlite)]];
@@ -1125,7 +1125,7 @@
             }
             else
             {
-                AWSDDLogInfo(@"Error while deleting record: %s", sqlite3_errmsg(self.sqlite));
+                AWSLogInfo(@"Error while deleting record: %s", sqlite3_errmsg(self.sqlite));
                 if(error != nil)
                 {
                     *error = [AWSCognitoUtil errorLocalDataStorageFailed:[NSString stringWithFormat:@"%s", sqlite3_errmsg(self.sqlite)]];
@@ -1134,7 +1134,7 @@
         }
         else
         {
-            AWSDDLogInfo(@"Error while deleting record: %s", sqlite3_errmsg(self.sqlite));
+            AWSLogInfo(@"Error while deleting record: %s", sqlite3_errmsg(self.sqlite));
             if(error != nil)
             {
                 *error = [AWSCognitoUtil errorLocalDataStorageFailed:[NSString stringWithFormat:@"%s", sqlite3_errmsg(self.sqlite)]];
@@ -1170,7 +1170,7 @@
 
         if(result){
             if(sqlite3_exec(self.sqlite, "COMMIT TRANSACTION",0,0,0)!=SQLITE_OK){
-                AWSDDLogInfo(@"Error commiting reparent: %s", sqlite3_errmsg(self.sqlite));
+                AWSLogInfo(@"Error commiting reparent: %s", sqlite3_errmsg(self.sqlite));
                 if(error != nil)
                 {
                     *error = [AWSCognitoUtil errorLocalDataStorageFailed:[NSString stringWithFormat:@"%s", sqlite3_errmsg(self.sqlite)]];
@@ -1178,7 +1178,7 @@
                 result = NO;
             }
         }else if(sqlite3_exec(self.sqlite, "ROLLBACK TRANSACTION",0,0,0)!=SQLITE_OK){
-            AWSDDLogInfo(@"Error rolling back reparent: %s", sqlite3_errmsg(self.sqlite));
+            AWSLogInfo(@"Error rolling back reparent: %s", sqlite3_errmsg(self.sqlite));
             //leave error message as is, don't overwrite it with the rollback error.
         }
     });
@@ -1215,7 +1215,7 @@
         
         if(result){
             if(sqlite3_exec(self.sqlite, "COMMIT TRANSACTION",0,0,0)!=SQLITE_OK){
-                AWSDDLogInfo(@"Error commiting reparent: %s", sqlite3_errmsg(self.sqlite));
+                AWSLogInfo(@"Error commiting reparent: %s", sqlite3_errmsg(self.sqlite));
                 if(error != nil)
                 {
                     *error = [AWSCognitoUtil errorLocalDataStorageFailed:[NSString stringWithFormat:@"%s", sqlite3_errmsg(self.sqlite)]];
@@ -1223,7 +1223,7 @@
                 result = NO;
             }
         }else if(sqlite3_exec(self.sqlite, "ROLLBACK TRANSACTION",0,0,0)!=SQLITE_OK){
-            AWSDDLogInfo(@"Error rolling back reparent: %s", sqlite3_errmsg(self.sqlite));
+            AWSLogInfo(@"Error rolling back reparent: %s", sqlite3_errmsg(self.sqlite));
             //leave error message as is, don't overwrite it with the rollback error.
         }
 
@@ -1256,7 +1256,7 @@
         }
         else
         {
-            AWSDDLogInfo(@"Error creating num records count statement: %s", sqlite3_errmsg(self.sqlite));
+            AWSLogInfo(@"Error creating num records count statement: %s", sqlite3_errmsg(self.sqlite));
         }
         
         sqlite3_reset(statement);
@@ -1294,7 +1294,7 @@
         }
         else
         {
-            AWSDDLogInfo(@"Error creating query sync count statement: %s", sqlite3_errmsg(self.sqlite));
+            AWSLogInfo(@"Error creating query sync count statement: %s", sqlite3_errmsg(self.sqlite));
         }
 
         sqlite3_reset(statement);
@@ -1329,12 +1329,12 @@
 
             if(SQLITE_DONE != sqlite3_step(statement))
             {
-                AWSDDLogInfo(@"Error while updating sync count: %s", sqlite3_errmsg(self.sqlite));
+                AWSLogInfo(@"Error while updating sync count: %s", sqlite3_errmsg(self.sqlite));
             }
         }
         else
         {
-            AWSDDLogInfo(@"Error updating sync count: %s", sqlite3_errmsg(self.sqlite));
+            AWSLogInfo(@"Error updating sync count: %s", sqlite3_errmsg(self.sqlite));
         }
         sqlite3_reset(statement);
         sqlite3_finalize(statement);
@@ -1382,7 +1382,7 @@
                                     AWSCognitoDatasetFieldName,
                                     AWSCognitoTableIdentityKeyName];
         
-        AWSDDLogDebug(@"updateMetadata = '%@'", updateMetadata);
+        AWSLogDebug(@"updateMetadata = '%@'", updateMetadata);
         
         NSString *updateData = [NSString stringWithFormat:
                                 @"UPDATE %@ SET \
@@ -1396,14 +1396,14 @@
                                 AWSCognitoTableDatasetKeyName,
                                 AWSCognitoTableIdentityKeyName];
         
-        AWSDDLogDebug(@"updateData = '%@'", updateData);
+        AWSLogDebug(@"updateData = '%@'", updateData);
         
         sqlite3_stmt *updateMetadataStatement;
         sqlite3_stmt *updateDataStatement;
         
         if((sqlite3_prepare_v2(self.sqlite, [updateMetadata UTF8String], -1, &updateMetadataStatement, NULL) != SQLITE_OK) ||
            (sqlite3_prepare_v2(self.sqlite, [updateData UTF8String], -1, &updateDataStatement, NULL) != SQLITE_OK)) {
-            AWSDDLogInfo(@"Error while reparenting data: %s", sqlite3_errmsg(self.sqlite));
+            AWSLogInfo(@"Error while reparenting data: %s", sqlite3_errmsg(self.sqlite));
             if(error != nil)
             {
                 *error = [AWSCognitoUtil errorLocalDataStorageFailed:[NSString stringWithFormat:@"%s", sqlite3_errmsg(self.sqlite)]];
@@ -1423,7 +1423,7 @@
                 sqlite3_bind_text(updateMetadataStatement, 4, [oldId UTF8String], -1, SQLITE_TRANSIENT);
                 
                 if(SQLITE_DONE != sqlite3_step(updateMetadataStatement)) {
-                    AWSDDLogInfo(@"Error while reparenting data: %s", sqlite3_errmsg(self.sqlite));
+                    AWSLogInfo(@"Error while reparenting data: %s", sqlite3_errmsg(self.sqlite));
                     result = NO;
                     if(error != nil)
                     {
@@ -1439,7 +1439,7 @@
                 
                 
                 if(SQLITE_DONE != sqlite3_step(updateDataStatement)) {
-                    AWSDDLogInfo(@"Error while reparenting data: %s", sqlite3_errmsg(self.sqlite));
+                    AWSLogInfo(@"Error while reparenting data: %s", sqlite3_errmsg(self.sqlite));
                     result = NO;
                     if(error != nil)
                     {
@@ -1456,7 +1456,7 @@
         }
         if(result){
             if(sqlite3_exec(self.sqlite, "COMMIT TRANSACTION",0,0,0)!=SQLITE_OK){
-                AWSDDLogInfo(@"Error commiting reparent: %s", sqlite3_errmsg(self.sqlite));
+                AWSLogInfo(@"Error commiting reparent: %s", sqlite3_errmsg(self.sqlite));
                 if(error != nil)
                 {
                     *error = [AWSCognitoUtil errorLocalDataStorageFailed:[NSString stringWithFormat:@"%s", sqlite3_errmsg(self.sqlite)]];
@@ -1464,7 +1464,7 @@
                 result = NO;
             }
         }else if(sqlite3_exec(self.sqlite, "ROLLBACK TRANSACTION",0,0,0)!=SQLITE_OK){
-            AWSDDLogInfo(@"Error rolling back reparent: %s", sqlite3_errmsg(self.sqlite));
+            AWSLogInfo(@"Error rolling back reparent: %s", sqlite3_errmsg(self.sqlite));
             //leave error message as is, don't overwrite it with the rollback error.
         }
     
@@ -1486,7 +1486,7 @@
                                      AWSCognitoTableIdentityKeyName,
                                      AWSCognitoDatasetFieldName];
         
-        AWSDDLogDebug(@"statementString = '%@'", statementString);
+        AWSLogDebug(@"statementString = '%@'", statementString);
         
         sqlite3_stmt *statement;
         if(sqlite3_prepare_v2(self.sqlite, [statementString UTF8String], -1, &statement, NULL) == SQLITE_OK)
@@ -1507,7 +1507,7 @@
         }
         else
         {
-            AWSDDLogInfo(@"Error while getting merged datasets: %s", sqlite3_errmsg(self.sqlite));
+            AWSLogInfo(@"Error while getting merged datasets: %s", sqlite3_errmsg(self.sqlite));
             if(error != nil)
             {
                 *error = [AWSCognitoUtil errorLocalDataStorageFailed:[NSString stringWithFormat:@"%s", sqlite3_errmsg(self.sqlite)]];
@@ -1530,7 +1530,7 @@
     NSArray *paths=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentDirectory=[paths objectAtIndex:0];
     NSString *filePath = [documentDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.sqlite3", AWSCognitoDefaultSqliteDataTableName]];
-    AWSDDLogDebug(@"Local database is: %@", filePath);
+    AWSLogDebug(@"Local database is: %@", filePath);
     return filePath;
 }
 
@@ -1552,7 +1552,7 @@
                                     AWSCognitoDatasetFieldName,
                                     AWSCognitoTableIdentityKeyName];
         
-        AWSDDLogDebug(@"updateMetadata = '%@'", updateMetadata);
+        AWSLogDebug(@"updateMetadata = '%@'", updateMetadata);
         
         NSString *updateData = [NSString stringWithFormat:
                                 @"UPDATE %@ SET \
@@ -1566,14 +1566,14 @@
                                 AWSCognitoTableDatasetKeyName,
                                 AWSCognitoTableIdentityKeyName];
         
-        AWSDDLogDebug(@"updateData = '%@'", updateData);
+        AWSLogDebug(@"updateData = '%@'", updateData);
         
         sqlite3_stmt *updateMetadataStatement;
         sqlite3_stmt *updateDataStatement;
         
         if((sqlite3_prepare_v2(self.sqlite, [updateMetadata UTF8String], -1, &updateMetadataStatement, NULL) != SQLITE_OK) ||
            (sqlite3_prepare_v2(self.sqlite, [updateData UTF8String], -1, &updateDataStatement, NULL) != SQLITE_OK)) {
-            AWSDDLogInfo(@"Error while resetting sync count: %s", sqlite3_errmsg(self.sqlite));
+            AWSLogInfo(@"Error while resetting sync count: %s", sqlite3_errmsg(self.sqlite));
             if(error != nil)
             {
                 *error = [AWSCognitoUtil errorLocalDataStorageFailed:[NSString stringWithFormat:@"%s", sqlite3_errmsg(self.sqlite)]];
@@ -1585,7 +1585,7 @@
             sqlite3_bind_text(updateMetadataStatement, 2, [self.identityId UTF8String], -1, SQLITE_TRANSIENT);
             
             if(SQLITE_DONE != sqlite3_step(updateMetadataStatement)) {
-                AWSDDLogInfo(@"Error while resetting sync count: %s", sqlite3_errmsg(self.sqlite));
+                AWSLogInfo(@"Error while resetting sync count: %s", sqlite3_errmsg(self.sqlite));
                 result = NO;
                 if(error != nil)
                 {
@@ -1602,7 +1602,7 @@
                 
                 
                 if(SQLITE_DONE != sqlite3_step(updateDataStatement)) {
-                    AWSDDLogInfo(@"Error while resetting sync count: %s", sqlite3_errmsg(self.sqlite));
+                    AWSLogInfo(@"Error while resetting sync count: %s", sqlite3_errmsg(self.sqlite));
                     result = NO;
                     if(error != nil)
                     {
@@ -1617,7 +1617,7 @@
         }
         if(result){
             if(sqlite3_exec(self.sqlite, "COMMIT TRANSACTION",0,0,0)!=SQLITE_OK){
-                AWSDDLogInfo(@"Error commiting reset: %s", sqlite3_errmsg(self.sqlite));
+                AWSLogInfo(@"Error commiting reset: %s", sqlite3_errmsg(self.sqlite));
                 if(error != nil)
                 {
                     *error = [AWSCognitoUtil errorLocalDataStorageFailed:[NSString stringWithFormat:@"%s", sqlite3_errmsg(self.sqlite)]];
@@ -1625,7 +1625,7 @@
                 result = NO;
             }
         }else if(sqlite3_exec(self.sqlite, "ROLLBACK TRANSACTION",0,0,0)!=SQLITE_OK){
-            AWSDDLogInfo(@"Error rolling back reset: %s", sqlite3_errmsg(self.sqlite));
+            AWSLogInfo(@"Error rolling back reset: %s", sqlite3_errmsg(self.sqlite));
             //leave error message as is, don't overwrite it with the rollback error.
         }
         
@@ -1650,7 +1650,7 @@
             
             if(SQLITE_DONE != sqlite3_step(statement))
             {
-                AWSDDLogInfo(@"Error while deleting metadata: %s", sqlite3_errmsg(self.sqlite));
+                AWSLogInfo(@"Error while deleting metadata: %s", sqlite3_errmsg(self.sqlite));
                 if(error != nil)
                 {
                     *error = [AWSCognitoUtil errorLocalDataStorageFailed:[NSString stringWithFormat:@"%s", sqlite3_errmsg(self.sqlite)]];
@@ -1662,7 +1662,7 @@
         }
         else
         {
-            AWSDDLogInfo(@"Error while deleting metadata: %s", sqlite3_errmsg(self.sqlite));
+            AWSLogInfo(@"Error while deleting metadata: %s", sqlite3_errmsg(self.sqlite));
             if(error != nil)
             {
                 *error = [AWSCognitoUtil errorLocalDataStorageFailed:[NSString stringWithFormat:@"%s", sqlite3_errmsg(self.sqlite)]];
@@ -1694,7 +1694,7 @@
      
             if(SQLITE_DONE != sqlite3_step(statement))
             {
-                AWSDDLogInfo(@"Error while clearing table: %s", sqlite3_errmsg(self.sqlite));
+                AWSLogInfo(@"Error while clearing table: %s", sqlite3_errmsg(self.sqlite));
                 if(error != nil)
                 {
                     *error = [AWSCognitoUtil errorLocalDataStorageFailed:[NSString stringWithFormat:@"%s", sqlite3_errmsg(self.sqlite)]];
@@ -1704,7 +1704,7 @@
         }
         else
         {
-            AWSDDLogInfo(@"Error while clearing table: %s", sqlite3_errmsg(self.sqlite));
+            AWSLogInfo(@"Error while clearing table: %s", sqlite3_errmsg(self.sqlite));
             if(error != nil)
             {
                 *error = [AWSCognitoUtil errorLocalDataStorageFailed:[NSString stringWithFormat:@"%s", sqlite3_errmsg(self.sqlite)]];
@@ -1730,14 +1730,14 @@
             
             if(SQLITE_DONE != sqlite3_step(statement))
             {
-                AWSDDLogInfo(@"Error while updating sync count: %s", sqlite3_errmsg(self.sqlite));
+                AWSLogInfo(@"Error while updating sync count: %s", sqlite3_errmsg(self.sqlite));
             }else {
                 result = YES;
             }
         }
         else
         {
-            AWSDDLogInfo(@"Error updating sync count: %s", sqlite3_errmsg(self.sqlite));
+            AWSLogInfo(@"Error updating sync count: %s", sqlite3_errmsg(self.sqlite));
         }
         sqlite3_reset(statement);
         sqlite3_finalize(statement);
@@ -1772,7 +1772,7 @@
             NSError *error;
             [[NSFileManager defaultManager] removeItemAtPath:[self filePath] error:&error];
             if (error) {
-                AWSDDLogDebug(@"Error deleting DB file %@", error);
+                AWSLogDebug(@"Error deleting DB file %@", error);
             }
         }
     });
