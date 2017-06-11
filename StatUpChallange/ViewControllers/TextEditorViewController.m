@@ -59,7 +59,8 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         if([text isEqualToString:@" "] || [text isEqualToString:@"\n"]){
             NSString *dayWordOne = [NSString stringWithFormat:@" %@",[[NSUserDefaults standardUserDefaults] objectForKey:WordOfTheDay]];
-            if([textView.text rangeOfString:dayWordOne].location != NSNotFound){
+            NSString *dayWordTwo = [NSString stringWithFormat:@"\n%@",[[NSUserDefaults standardUserDefaults] objectForKey:WordOfTheDay]];
+            if([textView.text rangeOfString:dayWordOne].location != NSNotFound || [textView.text rangeOfString:dayWordTwo].location != NSNotFound){
                 typedMsg = [textView.text stringByReplacingOccurrencesOfString:[[NSUserDefaults standardUserDefaults] objectForKey:WordOfTheDay] withString:@""];
                 NSLog(@"%@",typedMsg);
                 editorTextView.text = @"";
