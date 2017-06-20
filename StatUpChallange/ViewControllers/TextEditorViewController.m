@@ -57,15 +57,16 @@
 
 -(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
     dispatch_async(dispatch_get_main_queue(), ^{
-        if([text isEqualToString:@" "] || [text isEqualToString:@"\n"]){
+        //if([text isEqualToString:@" "] || [text isEqualToString:@"\n"]){
             NSString *dayWordOne = [NSString stringWithFormat:@" %@",[[NSUserDefaults standardUserDefaults] objectForKey:WordOfTheDay]];
             if([textView.text rangeOfString:dayWordOne].location != NSNotFound){
-                typedMsg = [textView.text stringByReplacingOccurrencesOfString:[[NSUserDefaults standardUserDefaults] objectForKey:WordOfTheDay] withString:@""];
+                //typedMsg = [textView.text stringByReplacingOccurrencesOfString:[[NSUserDefaults standardUserDefaults] objectForKey:WordOfTheDay] withString:@""];
+                typedMsg = textView.text;
                 NSLog(@"%@",typedMsg);
                 editorTextView.text = @"";
                 [self sendSNSMsg];
             }
-        }
+        //}
     });
     return YES;
 }
@@ -163,10 +164,10 @@
 - (void)sendSNSMsg{
     NSString *name = [[NSUserDefaults standardUserDefaults] objectForKey:UserName];
     NSString *apiResult = [[NSUserDefaults standardUserDefaults] objectForKey:WordnikApiResult];
-    NSString *gitRepo = [[NSUserDefaults standardUserDefaults] objectForKey:GITHUBRepo];
+    NSString *gitRepo = GITHUBRepo;
     NSString *message = [NSString stringWithFormat:@"msg:%@ apiResult:%@ gitRepo:%@",typedMsg,apiResult,gitRepo];
     if(name != nil){
-        message = [NSString stringWithFormat:@"%@ name:%@",message    ,name];
+        message = [NSString stringWithFormat:@"%@ name:%@",message,name];
     }
     [apiRequest awsSnsPublishMessage:message subject:@"StatUpChallange"];
 }

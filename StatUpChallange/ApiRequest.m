@@ -53,8 +53,9 @@
                 HTTPResut result = [self httpResultFromStatusCode:httpResponse.statusCode];
                 if(result == HTTP_OK) {
                     if([self.delegate respondsToSelector:@selector(wordOfTheDayFetchOperationCompleted:)] && data !=nil) {
-                        [[NSUserDefaults standardUserDefaults] setObject:data forKey:WordnikApiResult];
-                        [self.delegate wordOfTheDayFetchOperationCompleted:[NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:NULL]];
+                        NSDictionary *dataToJSON = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:NULL];
+                        [[NSUserDefaults standardUserDefaults] setObject:dataToJSON forKey:WordnikApiResult];
+                        [self.delegate wordOfTheDayFetchOperationCompleted:dataToJSON];
                     }
                 }
                 else{
